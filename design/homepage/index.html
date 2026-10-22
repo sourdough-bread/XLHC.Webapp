@@ -159,6 +159,17 @@ section.band { padding-block: 3.5rem; }
 .news .lead-story h3 { font-size: 2rem; }
 @media (min-width: 760px) { .news { grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; } .news .lead-story { grid-row: span 2; justify-content: end; } }
 
+
+/* Events */
+.events { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.events li { display: grid; grid-template-columns: 4.25rem 1fr; gap: 1rem; align-items: center; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1rem; min-width: 0; }
+.events li > div { min-width: 0; display: grid; gap: .3rem; justify-items: start; }
+.events p { color: var(--muted); font-size: .95rem; }
+.cal { display: grid; justify-items: center; line-height: 1; padding: .5rem 0; border-radius: 10px; background: var(--turf); color: #fff; font-variant-numeric: tabular-nums; }
+.cal span { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
+.cal b { font-family: var(--font-display); font-size: 2rem; font-weight: 900; margin-block: .1rem; }
+@media (min-width: 900px) { .events { grid-template-columns: repeat(3, 1fr); } }
+
 /* Join */
 .join { background: var(--ball); color: var(--ball-ink); }
 .join h2 { color: var(--ball-ink); }
@@ -227,6 +238,19 @@ section.band { padding-block: 3.5rem; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
 .site-footer a { text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
+.footer-top { display: grid; gap: 2rem; }
+@media (min-width: 900px) { .footer-top { grid-template-columns: 1fr 2fr; } }
+.footer-visit { display: grid; gap: .5rem; justify-items: start; }
+.footer-visit address { font-style: normal; color: var(--paper); font-weight: 700; font-size: 1.05rem; }
+.footer-visit address span { font-weight: 500; font-size: .95rem; color: color-mix(in srgb, var(--paper) 80%, transparent); }
+.maps a { text-decoration: underline; }
+.social-icons { display: flex; gap: .5rem; margin-top: .25rem; }
+.social-icons a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: color-mix(in srgb, var(--paper) 12%, transparent); color: var(--paper); }
+.social-icons a:hover { background: var(--ball); color: var(--ball-ink); }
+.social-icons svg { width: 22px; height: 22px; }
+.funders { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid color-mix(in srgb, var(--paper) 15%, transparent); }
+.funders ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.funders li { padding: .55rem .9rem; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: .02em; color: var(--paper); }
 .footer-base { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid color-mix(in srgb, var(--paper) 15%, transparent); display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
 
 /* Design preview switch (prototype only) */
@@ -262,7 +286,7 @@ section.band { padding-block: 3.5rem; }
       <a href="#sport">Sport</a>
       <a href="#juniors">Juniors</a>
       <a href="#seniors">Seniors</a>
-      <a href="#acces">Accès</a>
+      <a href="#agenda">Agenda</a>
     </nav>
     <div class="lang" role="group" aria-label="Langue"><a href="#fr" aria-current="true" lang="fr">FR</a><a href="#en" lang="en">EN</a></div>
     <a class="btn btn-join" href="#rejoindre">S’inscrire</a>
@@ -276,7 +300,8 @@ section.band { padding-block: 3.5rem; }
     <a href="#sport">Sport</a>
     <a href="#juniors">Juniors</a>
     <a href="#seniors">Seniors</a>
-    <a href="#acces">Accès et parking</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#acces">Accès</a>
   </nav>
 </header>
 
@@ -361,6 +386,32 @@ section.band { padding-block: 3.5rem; }
     </div>
   </section>
 
+  <section class="band" id="agenda" aria-labelledby="agenda-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Agenda</p>
+          <h2 id="agenda-title">Prochains événements</h2>
+        </div>
+        <a class="more" href="#agenda-all">Tout l’agenda →</a>
+      </div>
+      <ol class="events">
+        <li>
+          <time class="cal" datetime="2026-11-07"><span>nov.</span><b>07</b><span>sam.</span></time>
+          <div><span class="tag">Seniors</span><h3>Tournoi des Mixettes</h3><p>Dès 10h · Terrain du XLHC</p></div>
+        </li>
+        <li>
+          <time class="cal" datetime="2026-12-05"><span>déc.</span><b>05</b><span>sam.</span></time>
+          <div><span class="tag">Juniors</span><h3>Saint-Nicolas des juniors</h3><p>14h–17h · Organisé par le comité Event Juniors</p></div>
+        </li>
+        <li>
+          <time class="cal" datetime="2027-01-04"><span>janv.</span><b>04</b><span>lun.</span></time>
+          <div><span class="tag">Stage</span><h3>Stage d’hiver juniors</h3><p>Du 4 au 8 janvier · Inscriptions ouvertes</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <section class="band join" id="rejoindre" aria-labelledby="join-title">
     <div class="wrap join-grid">
       <div class="join-intro">
@@ -378,104 +429,16 @@ section.band { padding-block: 3.5rem; }
     </div>
   </section>
 
-  <section class="band" id="whatsapp" aria-labelledby="community-title">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Communauté</p>
-          <h2 id="community-title">Reste dans la boucle</h2>
-        </div>
-      </div>
-      <div class="community">
-        <div class="wa-card">
-          <div class="wa-icon"><svg aria-hidden="true"><use href="#i-wa"/></svg></div>
-          <h3>Communauté WhatsApp du club</h3>
-          <p style="color:var(--muted)">Annulations météo, événements, appels aux bénévoles&nbsp;: c’est là que tout se passe. Une fois dedans, rejoins aussi le groupe de ton équipe.</p>
-          <a class="btn btn-wa" href="https://chat.whatsapp.com/DvNqfacKeQ2KBX0g4GJEMR" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Rejoindre sur WhatsApp</a>
-        </div>
-        <div class="socials">
-          <a class="social" href="https://www.instagram.com/ixelles_hockey_club" target="_blank" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-ig"/></svg>
-            <span><b>Instagram</b><small>@ixelles_hockey_club</small></span>
-            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-          </a>
-          <a class="social" href="https://www.facebook.com/IxellesHC/" target="_blank" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-fb"/></svg>
-            <span><b>Facebook</b><small>IxellesHC</small></span>
-            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="acces" aria-labelledby="acces-title" style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Nous trouver</p>
-          <h2 id="acces-title">Accès et parking</h2>
-        </div>
-        <a class="more" href="#acces-detail">Plan détaillé →</a>
-      </div>
-      <div class="findus">
-        <div class="map">
-          <svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-label="Plan schématique : le terrain entre la rue Volta (haut) et la rue de Brebis (bas)" role="img">
-            <rect class="map-bg" width="600" height="340"/>
-            <rect class="map-park" x="170" y="70" width="290" height="190" rx="16"/>
-            <path class="map-road-edge" d="M-10 40 C150 30 380 45 610 30"/>
-            <path class="map-road" d="M-10 40 C150 30 380 45 610 30"/>
-            <path class="map-road-edge" d="M-10 300 C180 312 420 290 610 305"/>
-            <path class="map-road" d="M-10 300 C180 312 420 290 610 305"/>
-            <path class="map-road-edge" d="M90 -10 L120 350"/>
-            <path class="map-road" d="M90 -10 L120 350"/>
-            <rect class="map-pitch" x="215" y="105" width="200" height="120" rx="6"/>
-            <path d="M315 105v120M265 105v120M365 105v120" stroke="#fff" stroke-width="2" opacity=".7"/>
-            <path d="M300 40 L300 105" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 5"/>
-            <path d="M345 225 L345 300" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 5"/>
-            <text class="map-label" x="470" y="24">Rue Volta</text>
-            <text class="map-label" x="440" y="328">Rue de Brebis</text>
-            <text class="map-label" x="190" y="88">Centre sportif</text>
-            <text class="map-label" x="380" y="250">Pétanque</text>
-            <g transform="translate(315 150)"><path class="map-pin" d="M0 0c-9-12-14-19-14-26a14 14 0 0 1 28 0c0 7-5 14-14 26Z"/><circle cx="0" cy="-26" r="5" fill="#fff"/></g>
-          </svg>
-          <div class="map-actions">
-            <a href="https://www.google.com/maps/search/?api=1&amp;query=50.813992,4.397711" target="_blank" rel="noopener">Google Maps</a>
-            <a href="https://maps.apple.com/?ll=50.813992,4.397711&amp;q=Ixelles%20Hockey%20Club" target="_blank" rel="noopener">Plans</a>
-            <a href="https://waze.com/ul?ll=50.813992,4.397711&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
-          </div>
-        </div>
-        <div class="entrances">
-          <div class="entrance">
-            <p class="eyebrow">Entrée du haut · centre sportif</p>
-            <address id="addr-volta">Rue Volta 18, 1050 Ixelles</address>
-            <button class="copy" type="button" data-copy="addr-volta">Copier l’adresse</button>
-          </div>
-          <div class="entrance">
-            <p class="eyebrow">Entrée du bas · côté pétanque</p>
-            <address id="addr-brebis">Rue de Brebis 77, 1050 Ixelles</address>
-            <button class="copy" type="button" data-copy="addr-brebis">Copier l’adresse</button>
-          </div>
-          <div class="entrance">
-            <p class="eyebrow">Parking</p>
-            <p style="color:var(--ink);margin-top:0">Zone bleue avec disque près de la rue de Brebis. Attention aux délais et aux redevances le samedi.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="band partners" id="partenaires" aria-labelledby="partners-title">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Merci</p>
-          <h2 id="partners-title">Partenaires et soutiens</h2>
+          <p class="eyebrow">Merci à eux</p>
+          <h2 id="partners-title">Nos partenaires</h2>
         </div>
         <a class="more" href="#sponsoring">Devenir partenaire →</a>
       </div>
       <div class="logo-group">
-        <h3>Nos partenaires</h3>
         <ul class="logos">
           <li><span class="wm">Hockey&#8209;Player<small>hockeyplayer.shop</small></span></li>
           <li><span class="wm">Weinvest</span></li>
@@ -485,43 +448,48 @@ section.band { padding-block: 3.5rem; }
           <li><span class="wm">G5V</span></li>
         </ul>
       </div>
-      <div class="logo-group">
-        <h3>Avec le soutien de</h3>
-        <ul class="logos">
-          <li><span class="wm">ADEPS</span></li>
-          <li><span class="wm">COCOF</span></li>
-          <li><span class="wm">Région de Bruxelles&#8209;Capitale</span></li>
-          <li><span class="wm">Centre Sportif Ixellois</span></li>
-          <li><span class="wm">Ixelles · Elsene<small>Commune</small></span></li>
-        </ul>
-      </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" id="acces">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <h4>Le club</h4>
-        <ul><li><a href="#adn">ADN et charte</a></li><li><a href="#equipe">Équipe</a></li><li><a href="#business">Business Club</a></li><li><a href="#contact">Contact</a></li></ul>
+    <div class="footer-top">
+      <div class="footer-visit">
+        <h4>Nous trouver</h4>
+        <address>Rue Volta 18, 1050 Ixelles<br><span>Entrée du bas : Rue de Brebis 77</span></address>
+        <p>Parking en zone bleue avec disque près de la rue de Brebis. Attention aux redevances le samedi.</p>
+        <p class="maps"><a href="https://www.google.com/maps/search/?api=1&amp;query=50.813992,4.397711" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?ll=50.813992,4.397711&amp;q=Ixelles%20Hockey%20Club" target="_blank" rel="noopener">Plans</a> · <a href="https://waze.com/ul?ll=50.813992,4.397711&amp;navigate=yes" target="_blank" rel="noopener">Waze</a></p>
+        <div class="social-icons">
+          <a href="https://chat.whatsapp.com/DvNqfacKeQ2KBX0g4GJEMR" target="_blank" rel="noopener" aria-label="Communauté WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+          <a href="https://www.instagram.com/ixelles_hockey_club" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+          <a href="https://www.facebook.com/IxellesHC/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+        </div>
       </div>
-      <div>
-        <h4>Sport</h4>
-        <ul><li><a href="#decouvrir">Je découvre</a></li><li><a href="#entrainements">Entraînements</a></li><li><a href="#occupation">Occupation du terrain</a></li><li><a href="#arbitrage">Arbitrage</a></li></ul>
-      </div>
-      <div>
-        <h4>Admin</h4>
-        <ul><li><a href="#affiliation">Demande d’affiliation</a></li><li><a href="#cotisations">Cotisations</a></li><li><a href="#mutuelle">Attestations mutuelles</a></li><li><a href="#accident">Déclaration d’accident</a></li></ul>
-      </div>
-      <div>
-        <h4>Suivre le club</h4>
-        <ul><li><a href="https://chat.whatsapp.com/DvNqfacKeQ2KBX0g4GJEMR" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://www.instagram.com/ixelles_hockey_club" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/IxellesHC/" target="_blank" rel="noopener">Facebook</a></li></ul>
+      <div class="footer-grid">
+        <div>
+          <h4>Le club</h4>
+          <ul><li><a href="#adn">ADN et charte</a></li><li><a href="#equipe">Équipe</a></li><li><a href="#business">Business Club</a></li><li><a href="#contact">Contact</a></li></ul>
+        </div>
+        <div>
+          <h4>Sport</h4>
+          <ul><li><a href="#decouvrir">Je découvre</a></li><li><a href="#entrainements">Entraînements</a></li><li><a href="#occupation">Occupation du terrain</a></li><li><a href="#arbitrage">Arbitrage</a></li></ul>
+        </div>
+        <div>
+          <h4>Admin</h4>
+          <ul><li><a href="#affiliation">Demande d’affiliation</a></li><li><a href="#cotisations">Cotisations</a></li><li><a href="#mutuelle">Attestations mutuelles</a></li><li><a href="#accident">Déclaration d’accident</a></li></ul>
+        </div>
       </div>
     </div>
+    <div class="funders">
+      <h4>Avec le soutien de</h4>
+      <ul>
+        <li>ADEPS</li><li>COCOF</li><li>Région de Bruxelles&#8209;Capitale</li><li>Centre Sportif Ixellois</li><li>Commune d’Ixelles</li>
+      </ul>
+    </div>
     <div class="footer-base">
-      <span>Ixelles Hockey Club · Rue Volta 18, 1050 Ixelles</span>
-      <span>FR · <a href="#en" lang="en">EN</a></span>
+      <span>© 2026 Ixelles Hockey Club</span>
+      <span><a href="#vie-privee">Vie privée</a> · FR · <a href="#en" lang="en">EN</a></span>
     </div>
   </div>
 </footer>
@@ -535,7 +503,9 @@ section.band { padding-block: 3.5rem; }
 
 <script>
 (function () {
-  // Pitch status. On the real site this object comes from the CMS / a JSON file the committee updates.
+  // Pitch status. The committee edits a Google Sheet; publish it as CSV (File > Share > Publish to web)
+  // and set STATUS_CSV_URL. Expected row 2: state (ok | partial | closed), message, updated (e.g. "jeu. 22/10 à 18h30").
+  var STATUS_CSV_URL = "";
   var STATES = {
     ok: { word: "Praticable", tag: "Terrain praticable", detail: "Tous les entraînements et matchs ont lieu normalement. Mis à jour le jeu. 22/10 à 18h30." },
     partial: { word: "Horaires modifiés", tag: "Matchs de 10h annulés", detail: "Matchs de 10h annulés. Matchs de 11h : MAS à 9h30. Mis à jour le ven. 23/10 à 18h30." },
@@ -553,6 +523,15 @@ section.band { padding-block: 3.5rem; }
     document.querySelectorAll(".preview-switch button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.state === key));
     });
+  }
+  if (STATUS_CSV_URL) {
+    fetch(STATUS_CSV_URL, { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (csv) {
+      var row = (csv.trim().split(/\r?\n/)[1] || "").split(",");
+      var key = (row[0] || "").trim();
+      if (!STATES[key]) return;
+      if (row[1]) STATES[key].detail = row.slice(1, -1).join(",").replace(/^"|"$/g, "").trim() + " Mis à jour le " + (row[row.length - 1] || "").trim() + ".";
+      setState(key);
+    }).catch(function () {});
   }
   document.querySelectorAll(".preview-switch button").forEach(function (b) {
     b.addEventListener("click", function () { setState(b.dataset.state); });
