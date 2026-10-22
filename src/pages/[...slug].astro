@@ -1,7 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getNavigation, pageHref } from '../data/navigation';
+import NewsList from '../components/NewsList.astro';
+import EventList from '../components/EventList.astro';
+import TeamList from '../components/TeamList.astro';
+import PartnerList from '../components/PartnerList.astro';
+import { getNavigation, getTranslation, pageHref, pageLocale } from '../data/navigation';
+import { getNews, getTeams, getUpcomingCamps, getUpcomingEvents, resolveHref } from '../data/content';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -13,14 +18,28 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+const locale = pageLocale(page);
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
 
 const href = pageHref(page.id);
-const nav = await getNavigation();
+const nav = await getNavigation(locale);
 const section = nav.find((s) => href.startsWith(s.href));
 const isSectionIndex = section?.href === href;
+const translationHref = await getTranslation(page.data.translationKey, otherLocale);
+const actions = page.data.actions
+  .map((a) => ({ ...a, href: resolveHref(a.href) }))
+  .filter((a) => a.href);
+
+const listing = page.data.listing;
 ---
 
-<BaseLayout title={page.data.title} description={page.data.description}>
+<BaseLayout
+  locale={locale}
+  title={page.data.title}
+  description={page.data.description}
+  image={page.data.image}
+  translationHref={translationHref}
+>
   <div class="container page">
     {
       section && !isSectionIndex && (
@@ -30,9 +49,28 @@ const isSectionIndex = section?.href === href;
       )
     }
     <h1>{page.data.title}</h1>
+    {
+      actions.length > 0 && (
+        <p class="actions">
+          {actions.map((a, i) => (
+            <a class:list={['button', { primary: i === 0 }]} href={a.href}>
+              {a.label}
+            </a>
+          ))}
+        </p>
+      )
+    }
     <div class="prose">
       <Content />
     </div>
+
+    {listing === 'news' && <NewsList items={await getNews()} locale={locale} />}
+    {listing === 'events' && <EventList items={await getUpcomingEvents()} locale={locale} />}
+    {listing === 'camps' && <EventList items={await getUpcomingCamps()} locale={locale} />}
+    {listing === 'juniors' && <TeamList items={await getTeams('juniors')} locale={locale} />}
+    {listing === 'seniors' && <TeamList items={await getTeams('seniors')} locale={locale} />}
+    {listing === 'partners' && <PartnerList />}
+
     {
       isSectionIndex && section.children.length > 0 && (
         <ul class="card-grid">

@@ -1,25 +1,40 @@
 ---
 import { getNavigation } from '../data/navigation';
 import { site } from '../data/site';
+import { homeHref, ui, type Locale } from '../i18n/ui';
 
-const nav = await getNavigation();
-const current = Astro.url.pathname;
-const isActive = (href: string) => current === href || current.startsWith(href);
+interface Props {
+  locale: Locale;
+  // Adresse de la même page dans l'autre langue.
+  translationHref: string;
+}
+
+const { locale, translationHref } = Astro.props;
+const t = ui[locale];
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
+const nav = await getNavigation(locale);
+const current = Astro.url.pathname.replace(/\/?$/, '/');
+const isActive = (href: string) => current.startsWith(href);
 ---
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="/" aria-label={`${site.name}, accueil`}>
+    <a class="brand" href={homeHref(locale)} aria-label={`${site.name}, ${t.home}`}>
       <span class="logo" aria-hidden="true">XL</span>
       <span class="brand-name">{site.shortName}</span>
     </a>
 
+    <a class="lang" href={translationHref} hreflang={otherLocale} lang={otherLocale}>
+      <span aria-hidden="true">{otherLocale.toUpperCase()}</span>
+      <span class="visually-hidden">{t.otherLanguage}</span>
+    </a>
+
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
       <span class="menu-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Menu</span>
+      <span class="visually-hidden">{t.menu}</span>
     </button>
 
-    <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+    <nav id="main-nav" class="main-nav" aria-label={t.mainNav}>
       <ul class="nav-list">
         {
           nav.map((section, i) => (
@@ -35,7 +50,7 @@ const isActive = (href: string) => current === href || current.startsWith(href);
                     aria-expanded="false"
                     aria-controls={`submenu-${i}`}
                   >
-                    <span class="visually-hidden">Sous-menu {section.label}</span>
+                    <span class="visually-hidden">{t.submenu} {section.label}</span>
                     <span class="chevron" aria-hidden="true" />
                   </button>
                 )}
@@ -98,7 +113,7 @@ const isActive = (href: string) => current === href || current.startsWith(href);
   .bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 0.5rem;
     min-height: var(--header-height);
   }
 
@@ -123,6 +138,17 @@ const isActive = (href: string) => current === href || current.startsWith(href);
     color: var(--color-primary);
     font-weight: 800;
     font-size: 0.95rem;
+  }
+
+  .lang {
+    margin-left: auto;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    border-radius: 6px;
+    color: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
   }
 
   .menu-toggle {
@@ -270,9 +296,15 @@ const isActive = (href: string) => current === href || current.startsWith(href);
       display: none;
     }
 
+    .lang {
+      order: 2;
+      margin-left: 0.75rem;
+    }
+
     .main-nav,
     .nav-open .main-nav {
       display: block;
+      margin-left: auto;
       position: static;
       overflow: visible;
       padding: 0;

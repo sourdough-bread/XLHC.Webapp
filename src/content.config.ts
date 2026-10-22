@@ -2,29 +2,101 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Pages du site, une par fichier Markdown dans src/content/pages/<section>/.
+// Une image doit toujours avoir un texte alternatif.
+const withImageAlt = <T extends { image?: unknown; imageAlt?: string }>(data: T, ctx: z.RefinementCtx) => {
+  if (data.image && !data.imageAlt) {
+    ctx.addIssue({ code: 'custom', path: ['imageAlt'], message: "imageAlt est obligatoire quand il y a une image" });
+  }
+};
+
+const action = z.object({ label: z.string(), href: z.string() });
+
+// Pages du site : src/content/pages/<langue>/<section>/<page>.md
 // Le fichier index.md d'un dossier est la page d'accueil de la section.
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    // Position dans le menu (plus petit = plus haut).
-    order: z.number().default(100),
-    // Masquer la page du menu sans la supprimer.
-    hidden: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z
+      .object({
+        title: z.string(),
+        // Résumé d'une ou deux phrases, utilisé par Google et les partages.
+        description: z.string().min(20),
+        // Position dans le menu (plus petit = plus haut).
+        order: z.number().default(100),
+        // Masquer la page du menu sans la supprimer.
+        hidden: z.boolean().default(false),
+        // Même valeur sur la version française et anglaise d'une page.
+        translationKey: z.string().optional(),
+        // Boutons affichés sous le titre (inscription Twizzit, etc.).
+        actions: z.array(action).default([]),
+        // Liste affichée après le texte de la page.
+        listing: z.enum(['news', 'events', 'camps', 'juniors', 'seniors', 'partners']).optional(),
+        image: image().optional(),
+        imageAlt: z.string().optional(),
+      })
+      .superRefine(withImageAlt),
 });
 
-// Actualités, une par fichier Markdown dans src/content/news/.
+// Actualités : src/content/news/<date>-<titre>.md
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
+  schema: ({ image }) =>
+    z
+      .object({
+        title: z.string(),
+        date: z.coerce.date(),
+        description: z.string().min(20),
+        image: image().optional(),
+        imageAlt: z.string().optional(),
+        draft: z.boolean().default(false),
+      })
+      .superRefine(withImageAlt),
+});
+
+// Événements : src/content/events/<date>-<nom>.yml
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/events' }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    location: z.string().optional(),
     summary: z.string().optional(),
-    draft: z.boolean().default(false),
+    // Lien d'inscription Twizzit.
+    signupUrl: z.string().url().optional(),
   }),
 });
 
-export const collections = { pages, news };
+// Stages : src/content/camps/<date>-<nom>.yml
+const camps = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/camps' }),
+  schema: z.object({
+    title: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date(),
+    ages: z.string(),
+    price: z.string(),
+    summary: z.string().optional(),
+    // Lien de réservation et paiement Twizzit.
+    bookingUrl: z.string().url().optional(),
+  }),
+});
+
+// Équipes : src/content/teams/<nom>.yml
+const teams = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/teams' }),
+  schema: z.object({
+    name: z.string(),
+    category: z.enum(['juniors', 'seniors']),
+    // Catégorie d'âge (juniors) ou division (seniors).
+    level: z.string(),
+    training: z.string().optional(),
+    hockeyBelgiumUrl: z.string().url().optional(),
+    // Adresse de rôle (juniors@…), jamais une adresse personnelle.
+    email: z.string().email().optional(),
+    recruiting: z.boolean().default(false),
+    order: z.number().default(100),
+  }),
+});
+
+export const collections = { pages, news, events, camps, teams };

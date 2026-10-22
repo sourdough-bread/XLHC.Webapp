@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsList from './NewsList.astro';
+import EventList from './EventList.astro';
+import PartnerList from './PartnerList.astro';
+import { getNews, getUpcomingEvents } from '../data/content';
+import { homeHref, ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui[locale];
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
+
+const latestNews = (await getNews()).slice(0, 3);
+const nextEvents = (await getUpcomingEvents()).slice(0, 3);
+
+const copy = {
+  fr: {
+    title: "Bienvenue à l'Ixelles Hockey Club",
+    lead: 'Des juniors dès 5 ans aux seniors, débutants ou confirmés : tout le monde a sa place sur le terrain.',
+    joinHref: '/rejoindre/',
+    tryHref: '/rejoindre/premiers-pas/',
+    links: [
+      { href: '/equipes/', title: 'Équipes', text: 'Juniors, seniors et stages de vacances.' },
+      { href: '/rejoindre/cotisations/', title: 'Cotisations', text: 'Les prix de la saison, sans surprise.' },
+      { href: '/membres/', title: 'Membres', text: 'Terrain, formalités, bénévolat, WhatsApp.' },
+      { href: '/contact/', title: 'Contact et accès', text: 'Adresse, transports et e-mails.' },
+    ],
+    newsHref: '/club/actus/',
+    eventsHref: '/club/evenements/',
+  },
+  en: {
+    title: 'Welcome to Ixelles Hockey Club',
+    lead: 'From juniors aged 5 to seniors, beginners or experienced: everyone has a place on the pitch.',
+    joinHref: '/en/join/',
+    tryHref: '/en/join/getting-started/',
+    links: [
+      { href: '/en/teams/juniors/', title: 'Juniors', text: 'The youth school, from age 5.' },
+      { href: '/en/teams/seniors/', title: 'Seniors', text: "Women's, men's and mixed teams." },
+      { href: '/en/join/fees/', title: 'Fees', text: "This season's prices, up front." },
+      { href: '/en/contact/', title: 'Contact and access', text: 'Address, transport and email.' },
+    ],
+    newsHref: '/club/actus/',
+    eventsHref: '/club/evenements/',
+  },
+}[locale];
+---
+
+<BaseLayout locale={locale} translationHref={homeHref(otherLocale)}>
+  <section class="hero">
+    <div class="container">
+      <h1>{copy.title}</h1>
+      <p class="lead">{copy.lead}</p>
+      <p class="actions">
+        <a class="button primary" href={copy.joinHref}>{t.join}</a>
+        <a class="button" href={copy.tryHref}>{t.tryIt}</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <section>
+      <ul class="card-grid">
+        {
+          copy.links.map((link) => (
+            <li>
+              <a class="card" href={link.href}>
+                <h2>{link.title}</h2>
+                <p>{link.text}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      latestNews.length > 0 && (
+        <section aria-labelledby="news">
+          <h2 id="news">{t.latestNews}</h2>
+          <NewsList items={latestNews} locale={locale} />
+          <p><a href={copy.newsHref}>{t.allNews} →</a></p>
+        </section>
+      )
+    }
+
+    {
+      nextEvents.length > 0 && (
+        <section aria-labelledby="events">
+          <h2 id="events">{t.nextEvents}</h2>
+          <EventList items={nextEvents} locale={locale} />
+          <p><a href={copy.eventsHref}>{t.allEvents} →</a></p>
+        </section>
+      )
+    }
+
+    <section aria-labelledby="partners">
+      <h2 id="partners">{t.partners}</h2>
+      <PartnerList />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: 2.5rem 2rem;
+    background: linear-gradient(160deg, var(--color-primary) 0%, #17448f 100%);
+    color: var(--color-primary-contrast);
+  }
+
+  .hero h1 {
+    color: inherit;
+  }
+
+  .lead {
+    max-width: 38rem;
+    margin: 0;
+    font-size: 1.15rem;
+    opacity: 0.92;
+  }
+
+  .container > section {
+    margin-top: 2rem;
+  }
+</style>

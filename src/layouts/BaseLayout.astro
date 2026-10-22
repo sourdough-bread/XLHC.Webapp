@@ -1,20 +1,32 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
+import PitchBanner from '../components/PitchBanner.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { homeHref, ui, type Locale } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
+  locale?: Locale;
   title?: string;
   description?: string;
+  image?: ImageMetadata;
+  // Adresse de la même page dans l'autre langue (sinon, l'accueil de l'autre langue).
+  translationHref?: string;
 }
 
-const { title, description = site.tagline } = Astro.props;
+const { locale = 'fr', title, description = ui[locale].tagline, image } = Astro.props;
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
+const translationHref = Astro.props.translationHref ?? homeHref(otherLocale);
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image && new URL((await getImage({ src: image, width: 1200 })).src, Astro.site);
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,18 +34,27 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonical} />
+    {
+      Astro.props.translationHref && (
+        <link rel="alternate" hreflang={otherLocale} href={new URL(Astro.props.translationHref, Astro.site)} />
+      )
+    }
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'fr' ? 'fr_BE' : 'en_GB'} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
   </head>
   <body>
-    <a class="skip-link" href="#contenu">Aller au contenu</a>
-    <Header />
+    <a class="skip-link" href="#contenu">{ui[locale].skip}</a>
+    <Header locale={locale} translationHref={translationHref} />
+    <PitchBanner locale={locale} />
     <main id="contenu">
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>
 

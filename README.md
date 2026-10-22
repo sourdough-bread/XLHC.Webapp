@@ -4,31 +4,50 @@ Le site web de l'Ixelles Hockey Club, pensé d'abord pour le téléphone. Il est
 
 ## Modifier le contenu
 
-Tout le texte du site se trouve dans des fichiers Markdown. Pas besoin de connaître la programmation : on peut les modifier directement sur GitHub avec le bouton crayon.
+Tout le texte du site se trouve dans des fichiers texte (Markdown ou YAML). On peut les modifier directement sur GitHub avec le bouton crayon ; un éditeur web (Decap ou Pages CMS) viendra s'y brancher.
 
 | Quoi | Où |
 | --- | --- |
-| Pages des sections (Le Club, Sport, Admin, Juniors, Seniors, XL-Card, Events) | `src/content/pages/<section>/` |
+| Pages en français (Rejoindre, Équipes, Club, Membres, Contact) | `src/content/pages/fr/` |
+| Pages en anglais (Join us, Teams, Contact) | `src/content/pages/en/` |
 | Actualités | `src/content/news/` |
-| Coordonnées, réseaux sociaux, état du terrain, partenaires | `src/data/site.ts` |
-| Couleurs et police | `src/styles/global.css` (variables en haut du fichier) |
+| Événements (dates, inscription Twizzit) | `src/content/events/` |
+| Stages (dates, âges, prix, réservation Twizzit) | `src/content/camps/` |
+| Équipes (cartes des pages Juniors et Seniors) | `src/content/teams/` |
+| Coordonnées, liens Twizzit, état du terrain, partenaires, pouvoirs publics | `src/data/site.ts` |
+| Textes de l'interface (menu, boutons) en FR et EN | `src/i18n/ui.ts` |
+| Anciennes adresses redirigées | `astro.config.mjs` |
+| Couleurs et police | `src/styles/global.css` |
+
+Les fichiers marqués « exemple » sont là pour montrer le format : remplacez-les ou supprimez-les.
 
 ### Ajouter une page
 
-Créez un fichier `.md` dans le dossier de la section, par exemple `src/content/pages/juniors/u12.md` :
+Créez un fichier `.md` dans le dossier de la section, par exemple `src/content/pages/fr/club/historique.md` :
 
 ```markdown
 ---
-title: "U12"
-order: 20
+title: "Historique"
+description: "Une ou deux phrases qui résument la page, pour Google et les partages."
+order: 50
 ---
 
 Le texte de la page, en Markdown.
+
+## Un titre avec une ancre fixe {#mon-ancre}
 ```
 
-La page apparaît automatiquement dans le menu et à l'adresse `/juniors/u12/`. `order` règle sa position dans le menu (plus petit = plus haut). Ajoutez `hidden: true` pour la retirer du menu sans la supprimer.
+La page apparaît automatiquement dans le menu, à l'adresse `/club/historique/`. Champs utiles :
 
-Le fichier `index.md` de chaque dossier est la page d'accueil de la section.
+- `description` : obligatoire.
+- `order` : position dans le menu (plus petit = plus haut).
+- `hidden: true` : retire la page du menu sans la supprimer.
+- `translationKey` : même valeur sur la version FR et EN d'une page, pour que le bouton FR/EN mène à la bonne page.
+- `image` et `imageAlt` : image de partage ; le texte alternatif est obligatoire dès qu'il y a une image.
+- `actions` : boutons sous le titre. `twizzit:join` et `twizzit:trial` renvoient aux liens Twizzit de `src/data/site.ts` (le bouton reste caché tant que le lien est vide).
+- `listing` : ajoute une liste après le texte (`news`, `events`, `camps`, `juniors`, `seniors` ou `partners`).
+
+Le fichier `index.md` d'un dossier est la page d'accueil de la section.
 
 ### Publier une actualité
 
@@ -38,17 +57,21 @@ Créez un fichier dans `src/content/news/`, par exemple `2026-11-05-tournoi.md` 
 ---
 title: "Tournoi de novembre"
 date: 2026-11-05
-summary: "Une phrase qui apparaît dans la liste des actus."
+description: "Une phrase qui apparaît dans la liste des actus."
 ---
 
 Le texte de l'article.
 ```
 
-Ajoutez `draft: true` pour préparer un article sans le publier.
+Ajoutez `draft: true` pour préparer un article sans le publier. Les trois dernières actus s'affichent sur l'accueil.
 
-### Changer l'état du terrain
+### Événements et stages
 
-Dans `src/data/site.ts`, modifiez `pitch` : `status` vaut `'ok'`, `'warning'` ou `'closed'`, et `label` est le texte affiché.
+Un fichier `.yml` par événement ou par stage. Les dates passées disparaissent d'elles-mêmes, et les trois prochains événements s'affichent sur l'accueil.
+
+### État du terrain
+
+Le bandeau en haut de chaque page lit l'état du terrain en direct depuis une feuille Google publiée en CSV, alimentée par un Google Form rempli depuis un téléphone. Colonnes : horodatage, état (Praticable / Incertain / Impraticable), remarque. Collez l'adresse CSV dans `pitch.sheetCsvUrl` de `src/data/site.ts`. Tant qu'elle est vide, c'est `pitch.fallback` qui s'affiche.
 
 ## Développement
 
