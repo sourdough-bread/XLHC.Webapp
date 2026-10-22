@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ixelles Hockey Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a top-down hockey pitch is the hero and mirrors the live pitch status; content below runs in one 1120px column of stacked bands. */
+:root {
+  --paper: #f4f6fb;
+  --surface: #ffffff;
+  --ink: #0d1b33;
+  --muted: #4d5b75;
+  --hair: #d9e0ec;
+  --turf: #1d4ea0;
+  --turf-deep: #133a7c;
+  --turf-line: #ffffff;
+  --ball: #ffcf33;
+  --ball-ink: #2a2100;
+  --ok: #157a45;
+  --ok-bg: #e3f4ea;
+  --warn: #a35c00;
+  --warn-bg: #fff1d9;
+  --stop: #b42828;
+  --stop-bg: #fde6e6;
+  --wa: #128c4b;
+  --font-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 14px;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0a1322; --surface: #111e35; --ink: #e9eefa; --muted: #a5b2cc; --hair: #24345a;
+    --turf: #2c5fbf; --turf-deep: #1a3f86; --turf-line: #e9eefa;
+    --ball: #ffd54d; --ball-ink: #2a2100;
+    --ok: #4cd08a; --ok-bg: #0f2e20; --warn: #f2a640; --warn-bg: #33230a; --stop: #f07272; --stop-bg: #361414;
+    --wa: #3ccf7f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0a1322; --surface: #111e35; --ink: #e9eefa; --muted: #a5b2cc; --hair: #24345a;
+  --turf: #2c5fbf; --turf-deep: #1a3f86; --turf-line: #e9eefa;
+  --ball: #ffd54d; --ball-ink: #2a2100;
+  --ok: #4cd08a; --ok-bg: #0f2e20; --warn: #f2a640; --warn-bg: #33230a; --stop: #f07272; --stop-bg: #361414;
+  --wa: #3ccf7f;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ball); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1; text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h2 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; text-transform: uppercase; }
+h3 { font-size: 1.5rem; font-weight: 800; }
+p { margin: 0; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .75rem 1.25rem; border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background-color .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-join { background: var(--ball); color: var(--ball-ink); }
+.btn-join:hover { background: color-mix(in srgb, var(--ball) 88%, var(--ink)); }
+.btn-ghost { border-color: currentColor; background: transparent; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* Sticky header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--turf-deep); }
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--turf-deep); color: #fff; }
+.header-row { display: flex; align-items: center; gap: .6rem; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; margin-right: auto; }
+.brand svg { width: 40px; height: 40px; flex: none; }
+.brand-name { font-family: var(--font-display); font-weight: 900; font-size: 1.35rem; text-transform: uppercase; line-height: .95; letter-spacing: .02em; }
+.brand-name small { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .16em; opacity: .8; }
+.nav { display: none; gap: .25rem; }
+.nav a { color: #fff; text-decoration: none; font-weight: 600; padding: .5rem .75rem; border-radius: 999px; }
+.nav a:hover { background: rgba(255,255,255,.12); }
+.header-row .btn-join { min-height: 40px; padding: .5rem 1rem; font-size: .95rem; }
+.lang { display: flex; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 2px; font-size: .8rem; font-weight: 700; }
+.lang a { color: #fff; text-decoration: none; padding: .3rem .55rem; border-radius: 999px; opacity: .75; }
+.lang a[aria-current="true"] { background: #fff; color: var(--turf-deep); opacity: 1; }
+.menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; border: 0; background: rgba(255,255,255,.12); color: #fff; cursor: pointer; }
+.menu-btn svg { width: 22px; height: 22px; }
+.mobile-nav { border-top: 1px solid rgba(255,255,255,.15); padding-block: .5rem 1rem; }
+.mobile-nav a { display: block; color: #fff; text-decoration: none; font-weight: 600; font-size: 1.1rem; padding: .75rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+@media (min-width: 900px) { .nav { display: flex; } .menu-btn, .mobile-nav { display: none !important; } }
+
+/* Pitch status banner */
+.status { border-bottom: 1px solid var(--hair); background: var(--status-bg); color: var(--ink); }
+.status[data-state="ok"] { --status-c: var(--ok); --status-bg: var(--ok-bg); }
+.status[data-state="partial"] { --status-c: var(--warn); --status-bg: var(--warn-bg); }
+.status[data-state="closed"] { --status-c: var(--stop); --status-bg: var(--stop-bg); }
+.status-row { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem 1rem; padding-block: .7rem; }
+.status-label { display: inline-flex; align-items: center; gap: .55rem; font-weight: 700; }
+.status-label b { color: var(--status-c); text-transform: uppercase; letter-spacing: .04em; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: var(--status-c); box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-c) 60%, transparent); animation: pulse 2.4s ease-out infinite; flex: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-c) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 10px transparent; } }
+.status-detail { color: var(--muted); font-size: .95rem; flex: 1 1 260px; min-width: 0; }
+.status-link { font-weight: 700; color: var(--status-c); white-space: nowrap; }
+
+/* Hero */
+.hero { background: var(--turf); color: #fff; overflow: hidden; }
+.hero-grid { display: grid; gap: 2rem; padding-block: 2.5rem 2rem; align-items: center; }
+.hero h1 { font-size: clamp(3rem, 11vw, 5.75rem); font-weight: 900; text-transform: uppercase; line-height: .9; }
+.hero h1 em { font-style: normal; color: var(--ball); }
+.hero-lede { font-size: 1.15rem; max-width: 34ch; margin-top: 1rem; opacity: .92; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.hero-ctas .btn-ghost { color: #fff; }
+.pitch { position: relative; width: 100%; max-width: 100%; }
+.pitch svg { display: block; width: 100%; height: auto; }
+.pitch-surface { fill: var(--turf-deep); transition: fill .4s ease; }
+.pitch-lines { fill: none; stroke: var(--turf-line); stroke-width: 4; }
+.pitch-lines .dash { stroke-dasharray: 14 12; }
+.pitch-ball { fill: var(--ball); }
+.pitch-tag { position: absolute; left: 50%; top: 50%; translate: -50% -50%; background: var(--surface); color: var(--ink); border-radius: 999px; padding: .45rem .9rem; font-weight: 700; font-size: .9rem; display: flex; align-items: center; gap: .5rem; white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
+.pitch-tag .dot { animation: none; }
+.hero[data-state="closed"] .pitch-surface { fill: #5b6475; }
+.hero[data-state="closed"] .pitch-ball { opacity: 0; }
+.hero[data-state="partial"] .pitch-surface { fill: color-mix(in srgb, var(--turf-deep) 70%, #6b5a2e); }
+.pitch-tag { --status-c: var(--ok); }
+.hero[data-state="partial"] .pitch-tag { --status-c: var(--warn); }
+.hero[data-state="closed"] .pitch-tag { --status-c: var(--stop); }
+.ball-roll { animation: roll 7s ease-in-out infinite alternate; }
+@keyframes roll { 0% { transform: translate(0, 0); } 50% { transform: translate(180px, -60px); } 100% { transform: translate(330px, 20px); } }
+.hero-facts { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding-block: 1rem 1.75rem; border-top: 1px solid rgba(255,255,255,.2); font-size: .95rem; }
+.hero-facts span { display: inline-flex; gap: .4rem; align-items: baseline; }
+.hero-facts b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; letter-spacing: .02em; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; padding-block: 3.5rem 2.5rem; } }
+
+/* Sections */
+section.band { padding-block: 3.5rem; }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .75rem 1.5rem; margin-bottom: 1.5rem; }
+.section-head p { color: var(--muted); max-width: 52ch; }
+.more { font-weight: 700; color: var(--turf); text-decoration: none; white-space: nowrap; }
+:root[data-theme="dark"] .more { color: var(--ball); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .more { color: var(--ball); } }
+.more:hover { text-decoration: underline; }
+
+/* News */
+.news { display: grid; gap: 1rem; }
+.news article { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.news time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+.tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .15rem .55rem; border-radius: 999px; background: color-mix(in srgb, var(--turf) 12%, transparent); color: var(--ink); }
+.news h3 a { text-decoration: none; }
+.news h3 a:hover { text-decoration: underline; }
+.news p { color: var(--muted); }
+.news .lead-story { background: var(--turf-deep); color: #fff; border-color: var(--turf-deep); }
+.news .lead-story p, .news .lead-story time { color: rgba(255,255,255,.8); }
+.news .lead-story .tag { background: var(--ball); color: var(--ball-ink); }
+.news .lead-story h3 { font-size: 2rem; }
+@media (min-width: 760px) { .news { grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; } .news .lead-story { grid-row: span 2; justify-content: end; } }
+
+
+/* Events */
+.events { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.events li { display: grid; grid-template-columns: 4.25rem 1fr; gap: 1rem; align-items: center; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1rem; min-width: 0; }
+.events li > div { min-width: 0; display: grid; gap: .3rem; justify-items: start; }
+.events p { color: var(--muted); font-size: .95rem; }
+.cal { display: grid; justify-items: center; line-height: 1; padding: .5rem 0; border-radius: 10px; background: var(--turf); color: #fff; font-variant-numeric: tabular-nums; }
+.cal span { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
+.cal b { font-family: var(--font-display); font-size: 2rem; font-weight: 900; margin-block: .1rem; }
+@media (min-width: 900px) { .events { grid-template-columns: repeat(3, 1fr); } }
+
+/* Join */
+.join { background: var(--ball); color: var(--ball-ink); }
+.join h2 { color: var(--ball-ink); }
+.join-grid { display: grid; gap: 2rem; }
+.join-intro p { margin-top: .75rem; max-width: 40ch; font-size: 1.05rem; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; counter-reset: step; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.75rem 1fr; gap: .9rem; align-items: start; background: rgba(255,255,255,.55); border-radius: var(--radius); padding: 1rem 1.1rem; }
+.steps li::before { content: counter(step); font-family: var(--font-display); font-weight: 900; font-size: 2rem; line-height: 1; text-align: center; }
+.steps strong { display: block; font-size: 1.05rem; }
+.steps a { font-weight: 700; }
+.join .btn-dark { background: var(--ball-ink); color: var(--ball); margin-top: 1.25rem; }
+.join-alt { margin-top: 1rem; font-size: .95rem; }
+@media (min-width: 900px) { .join-grid { grid-template-columns: 1fr 1.1fr; align-items: center; } }
+
+/* Community */
+.community { display: grid; gap: 1rem; }
+.wa-card { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1.5rem; display: grid; gap: 1rem; min-width: 0; }
+.wa-card .wa-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--wa); color: #fff; display: grid; place-items: center; }
+.wa-card .wa-icon svg { width: 28px; height: 28px; }
+.btn-wa { background: var(--wa); color: #fff; justify-self: start; }
+.socials { display: grid; gap: .75rem; }
+.social { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); text-decoration: none; min-width: 0; }
+.social:hover { border-color: var(--turf); }
+.social svg { width: 28px; height: 28px; flex: none; }
+.social span { display: grid; min-width: 0; }
+.social small { color: var(--muted); overflow-wrap: anywhere; }
+.social b { font-size: 1.05rem; }
+.social .arrow { margin-left: auto; width: 20px; height: 20px; color: var(--muted); }
+@media (min-width: 760px) { .community { grid-template-columns: 1.3fr 1fr; } }
+
+/* Find us */
+.findus { display: grid; gap: 1rem; }
+.map { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--hair); background: var(--surface); min-height: 280px; }
+.map svg { display: block; width: 100%; height: 100%; min-height: 280px; }
+.map-bg { fill: color-mix(in srgb, var(--paper) 60%, var(--hair)); }
+.map-road { stroke: var(--surface); stroke-width: 14; fill: none; stroke-linecap: round; }
+.map-road-edge { stroke: var(--hair); stroke-width: 18; fill: none; stroke-linecap: round; }
+.map-park { fill: color-mix(in srgb, var(--ok) 18%, var(--paper)); }
+.map-pitch { fill: var(--turf); }
+.map-label { font-family: var(--font-body); font-size: 13px; font-weight: 600; fill: var(--muted); }
+.map-pin { fill: var(--stop); }
+.map-actions { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: .5rem; }
+.map-actions a { background: var(--surface); color: var(--ink); border: 1px solid var(--hair); border-radius: 999px; padding: .5rem .9rem; font-weight: 700; font-size: .9rem; text-decoration: none; }
+.entrances { display: grid; gap: .75rem; }
+.entrance { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+.entrance .eyebrow { margin-bottom: .2rem; }
+.entrance address { font-style: normal; font-weight: 700; font-size: 1.15rem; }
+.entrance p { color: var(--muted); font-size: .95rem; margin-top: .25rem; }
+.copy { margin-top: .5rem; font: inherit; font-size: .85rem; font-weight: 700; border: 1px solid var(--hair); background: transparent; color: var(--ink); border-radius: 999px; padding: .3rem .8rem; cursor: pointer; }
+@media (min-width: 900px) { .findus { grid-template-columns: 1.5fr 1fr; } .map, .map svg { min-height: 100%; } }
+
+/* Partners */
+.partners { border-top: 1px solid var(--hair); }
+.logo-group + .logo-group { margin-top: 2rem; }
+.logo-group h3 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; }
+.logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .75rem; list-style: none; margin: 0; padding: 0; }
+.logos li { display: grid; place-items: center; text-align: center; min-height: 84px; padding: .75rem; background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; font-weight: 700; color: var(--muted); filter: grayscale(1); transition: color .2s, filter .2s; }
+.logos li:hover { color: var(--ink); filter: none; }
+.logos .wm { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; letter-spacing: .02em; line-height: 1.05; }
+.logos .wm small { display: block; font-family: var(--font-body); font-size: .7rem; font-weight: 600; letter-spacing: .04em; }
+
+/* Footer */
+.site-footer { background: var(--ink); color: color-mix(in srgb, var(--paper) 80%, transparent); padding-block: 2.5rem; font-size: .95rem; }
+.footer-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.site-footer h4 { margin: 0 0 .5rem; color: var(--paper); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-top { display: grid; gap: 2rem; }
+@media (min-width: 900px) { .footer-top { grid-template-columns: 1fr 2fr; } }
+.footer-visit { display: grid; gap: .5rem; justify-items: start; }
+.footer-visit address { font-style: normal; color: var(--paper); font-weight: 700; font-size: 1.05rem; }
+.footer-visit address span { font-weight: 500; font-size: .95rem; color: color-mix(in srgb, var(--paper) 80%, transparent); }
+.maps a { text-decoration: underline; }
+.social-icons { display: flex; gap: .5rem; margin-top: .25rem; }
+.social-icons a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: color-mix(in srgb, var(--paper) 12%, transparent); color: var(--paper); }
+.social-icons a:hover { background: var(--ball); color: var(--ball-ink); }
+.social-icons svg { width: 22px; height: 22px; }
+.funders { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid color-mix(in srgb, var(--paper) 15%, transparent); }
+.funders ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.funders li { padding: .55rem .9rem; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: .02em; color: var(--paper); }
+.footer-base { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid color-mix(in srgb, var(--paper) 15%, transparent); display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+
+/* Design preview switch (prototype only) */
+.preview-switch { position: fixed; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 30; display: flex; align-items: center; gap: .25rem; padding: .3rem; background: var(--surface); border: 1px solid var(--hair); border-radius: 999px; box-shadow: 0 8px 28px rgba(0,0,0,.18); font-size: .8rem; }
+.preview-switch span { padding: 0 .5rem; font-weight: 700; color: var(--muted); }
+.preview-switch button { font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: .4rem .7rem; background: transparent; color: var(--ink); cursor: pointer; }
+.preview-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+@media (max-width: 520px) { .preview-switch span { display: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 3.8c2.7 0 3 0 4 .1 2.7.1 4 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-4-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C4 5.3 5.3 4 8 3.9c1 0 1.3-.1 4-.1ZM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="crest" viewBox="0 0 40 40"><path fill="#ffcf33" d="M20 2 36 7v12c0 9.5-6.6 16.3-16 19C10.6 35.3 4 28.5 4 19V7Z"/><path fill="#133a7c" d="M20 5.2 33 9.3V19c0 7.8-5.2 13.6-13 16-7.8-2.4-13-8.2-13-16V9.3Z"/><text x="20" y="24.5" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="13" fill="#ffffff">XL</text><circle cx="20" cy="30" r="2" fill="#ffcf33"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top" aria-label="Ixelles Hockey Club, accueil">
+      <svg aria-hidden="true"><use href="#crest"/></svg>
+      <span class="brand-name">Ixelles <small>Hockey Club</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#actu">Actu</a>
+      <a href="#club">Le club</a>
+      <a href="#sport">Sport</a>
+      <a href="#juniors">Juniors</a>
+      <a href="#seniors">Seniors</a>
+      <a href="#agenda">Agenda</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue"><a href="#fr" aria-current="true" lang="fr">FR</a><a href="#en" lang="en">EN</a></div>
+    <a class="btn btn-join" href="#rejoindre">S’inscrire</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Ouvrir le menu">
+      <svg aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+  </div>
+  <nav class="wrap mobile-nav" id="mobile-nav" aria-label="Menu" hidden>
+    <a href="#actu">Actu</a>
+    <a href="#club">Le club</a>
+    <a href="#sport">Sport</a>
+    <a href="#juniors">Juniors</a>
+    <a href="#seniors">Seniors</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#acces">Accès</a>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="status" id="status" data-state="ok" role="status" aria-live="polite">
+    <div class="wrap status-row">
+      <span class="status-label"><span class="dot" aria-hidden="true"></span>État du terrain&nbsp;: <b id="status-word">Praticable</b></span>
+      <span class="status-detail" id="status-detail">Tous les entraînements et matchs ont lieu normalement. Mis à jour le jeu. 22/10 à 18h30.</span>
+      <a class="status-link" href="#meteo">Météo et décisions →</a>
+    </div>
+  </div>
+
+  <section class="hero" id="hero" data-state="ok" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" style="color:rgba(255,255,255,.75)">Club de hockey sur gazon · Ixelles, Bruxelles</p>
+        <h1 id="hero-title" style="margin-top:.75rem">Le hockey, <em>ensemble</em>, à Ixelles.</h1>
+        <p class="hero-lede">Un club associatif ouvert à tous, des premiers pas des juniors aux seniors et aux Mixettes. Viens essayer lors d’un entraînement.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-join" href="#rejoindre">Rejoindre le club</a>
+          <a class="btn btn-ghost" href="#decouvrir">Faire un essai</a>
+        </div>
+      </div>
+      <div class="pitch" aria-hidden="true">
+        <svg viewBox="0 0 914 550" role="img">
+          <rect class="pitch-surface" x="0" y="0" width="914" height="550" rx="18"/>
+          <g class="pitch-lines">
+            <rect x="16" y="16" width="882" height="518"/>
+            <line x1="457" y1="16" x2="457" y2="534"/>
+            <line x1="245" y1="16" x2="245" y2="534"/>
+            <line x1="669" y1="16" x2="669" y2="534"/>
+            <path d="M16 126.4A146.3 146.3 0 0 1 162.3 272.7V277.3A146.3 146.3 0 0 1 16 423.6"/>
+            <path class="dash" d="M16 76.4A196.3 196.3 0 0 1 212.3 272.7V277.3A196.3 196.3 0 0 1 16 473.6"/>
+            <path d="M898 126.4A146.3 146.3 0 0 0 751.7 272.7V277.3A146.3 146.3 0 0 0 898 423.6"/>
+            <path class="dash" d="M898 76.4A196.3 196.3 0 0 0 701.7 272.7V277.3A196.3 196.3 0 0 0 898 473.6"/>
+            <circle cx="80.7" cy="275" r="5" fill="var(--turf-line)" stroke="none"/>
+            <circle cx="833.3" cy="275" r="5" fill="var(--turf-line)" stroke="none"/>
+            <rect x="2" y="256.7" width="14" height="36.6" stroke-width="3"/>
+            <rect x="898" y="256.7" width="14" height="36.6" stroke-width="3"/>
+          </g>
+          <g class="ball-roll"><circle class="pitch-ball" cx="300" cy="330" r="11"/></g>
+        </svg>
+        <div class="pitch-tag"><span class="dot" aria-hidden="true"></span><span id="pitch-tag-text">Terrain praticable</span></div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="hero-facts">
+        <span><b>Juniors</b> &amp; stages</span>
+        <span><b>Seniors</b> &amp; Mixettes</span>
+        <span><b>Rue Volta 18</b> 1050 Ixelles</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="actu" aria-labelledby="actu-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Actu</p>
+          <h2 id="actu-title">Dernières nouvelles</h2>
+        </div>
+        <a class="more" href="#actu-all">Toutes les actus →</a>
+      </div>
+      <div class="news">
+        <article class="lead-story">
+          <time datetime="2026-10-20"><span class="tag">Bénévoles</span> 20 oct. 2026</time>
+          <h3><a href="#parents">Parents, WE need you&nbsp;!</a></h3>
+          <p>On cherche des parents pour le comité « Event Juniors » (Saint-Nicolas, Pâques, barbecues) et pour arbitrer les matchs juniors en demi-terrain, avec formation et encadrement par un arbitre national.</p>
+          <p><a class="more" style="color:var(--ball)" href="#parents">Je donne un coup de main →</a></p>
+        </article>
+        <article>
+          <time datetime="2026-10-17"><span class="tag">Météo</span> 17 oct. 2026</time>
+          <h3><a href="#meteo">Week-end du 18–19 octobre&nbsp;: matchs de 10h décalés</a></h3>
+          <p>Les décisions sur la tenue des matchs sont publiées sur la page Météo, avec l’heure de mise à jour.</p>
+        </article>
+        <article>
+          <time datetime="2026-10-09"><span class="tag">Club</span> 9 oct. 2026</time>
+          <h3><a href="#whatsapp">Rejoins la communauté WhatsApp</a></h3>
+          <p>Toutes les infos du club, les annulations et les événements arrivent d’abord sur WhatsApp.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="agenda" aria-labelledby="agenda-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Agenda</p>
+          <h2 id="agenda-title">Prochains événements</h2>
+        </div>
+        <a class="more" href="#agenda-all">Tout l’agenda →</a>
+      </div>
+      <ol class="events">
+        <li>
+          <time class="cal" datetime="2026-11-07"><span>nov.</span><b>07</b><span>sam.</span></time>
+          <div><span class="tag">Seniors</span><h3>Tournoi des Mixettes</h3><p>Dès 10h · Terrain du XLHC</p></div>
+        </li>
+        <li>
+          <time class="cal" datetime="2026-12-05"><span>déc.</span><b>05</b><span>sam.</span></time>
+          <div><span class="tag">Juniors</span><h3>Saint-Nicolas des juniors</h3><p>14h–17h · Organisé par le comité Event Juniors</p></div>
+        </li>
+        <li>
+          <time class="cal" datetime="2027-01-04"><span>janv.</span><b>04</b><span>lun.</span></time>
+          <div><span class="tag">Stage</span><h3>Stage d’hiver juniors</h3><p>Du 4 au 8 janvier · Inscriptions ouvertes</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band join" id="rejoindre" aria-labelledby="join-title">
+    <div class="wrap join-grid">
+      <div class="join-intro">
+        <p class="eyebrow" style="color:var(--ball-ink);opacity:.75">Inscriptions</p>
+        <h2 id="join-title">Rejoindre le XLHC</h2>
+        <p>Pour toi ou pour ton enfant, l’inscription se fait en ligne. Tu peux étaler le paiement de la cotisation.</p>
+        <a class="btn btn-dark" href="#affiliation">Faire ma demande d’affiliation</a>
+        <p class="join-alt">Pas encore sûr&nbsp;? <a href="#decouvrir">Découvre le hockey</a> lors d’un entraînement d’essai.</p>
+      </div>
+      <ol class="steps">
+        <li><div><strong>Remplis la demande d’affiliation</strong>Un formulaire par joueur, juniors comme seniors.</div></li>
+        <li><div><strong>Règle la cotisation</strong>Voir les <a href="#cotisations">montants</a> et l’<a href="#etalement">étalement de paiement</a>.</div></li>
+        <li><div><strong>Installe l’app Hockey Belgium</strong>Pour suivre ton équipe, tes matchs et tes convocations.</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band partners" id="partenaires" aria-labelledby="partners-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Merci à eux</p>
+          <h2 id="partners-title">Nos partenaires</h2>
+        </div>
+        <a class="more" href="#sponsoring">Devenir partenaire →</a>
+      </div>
+      <div class="logo-group">
+        <ul class="logos">
+          <li><span class="wm">Hockey&#8209;Player<small>hockeyplayer.shop</small></span></li>
+          <li><span class="wm">Weinvest</span></li>
+          <li><span class="wm">BX1</span></li>
+          <li><span class="wm">Digitribe</span></li>
+          <li><span class="wm">Victor<small>avocats</small></span></li>
+          <li><span class="wm">G5V</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="acces">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-visit">
+        <h4>Nous trouver</h4>
+        <address>Rue Volta 18, 1050 Ixelles<br><span>Entrée du bas : Rue de Brebis 77</span></address>
+        <p>Parking en zone bleue avec disque près de la rue de Brebis. Attention aux redevances le samedi.</p>
+        <p class="maps"><a href="https://www.google.com/maps/search/?api=1&amp;query=50.813992,4.397711" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?ll=50.813992,4.397711&amp;q=Ixelles%20Hockey%20Club" target="_blank" rel="noopener">Plans</a> · <a href="https://waze.com/ul?ll=50.813992,4.397711&amp;navigate=yes" target="_blank" rel="noopener">Waze</a></p>
+        <div class="social-icons">
+          <a href="https://chat.whatsapp.com/DvNqfacKeQ2KBX0g4GJEMR" target="_blank" rel="noopener" aria-label="Communauté WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+          <a href="https://www.instagram.com/ixelles_hockey_club" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+          <a href="https://www.facebook.com/IxellesHC/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-grid">
+        <div>
+          <h4>Le club</h4>
+          <ul><li><a href="#adn">ADN et charte</a></li><li><a href="#equipe">Équipe</a></li><li><a href="#business">Business Club</a></li><li><a href="#contact">Contact</a></li></ul>
+        </div>
+        <div>
+          <h4>Sport</h4>
+          <ul><li><a href="#decouvrir">Je découvre</a></li><li><a href="#entrainements">Entraînements</a></li><li><a href="#occupation">Occupation du terrain</a></li><li><a href="#arbitrage">Arbitrage</a></li></ul>
+        </div>
+        <div>
+          <h4>Admin</h4>
+          <ul><li><a href="#affiliation">Demande d’affiliation</a></li><li><a href="#cotisations">Cotisations</a></li><li><a href="#mutuelle">Attestations mutuelles</a></li><li><a href="#accident">Déclaration d’accident</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="funders">
+      <h4>Avec le soutien de</h4>
+      <ul>
+        <li>ADEPS</li><li>COCOF</li><li>Région de Bruxelles&#8209;Capitale</li><li>Centre Sportif Ixellois</li><li>Commune d’Ixelles</li>
+      </ul>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Ixelles Hockey Club</span>
+      <span><a href="#vie-privee">Vie privée</a> · FR · <a href="#en" lang="en">EN</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="preview-switch" role="group" aria-label="Aperçu des états du terrain">
+  <span>Aperçu&nbsp;:</span>
+  <button type="button" data-state="ok" aria-pressed="true">Praticable</button>
+  <button type="button" data-state="partial" aria-pressed="false">Modifié</button>
+  <button type="button" data-state="closed" aria-pressed="false">Impraticable</button>
+</div>
+
+<script>
+(function () {
+  // Pitch status. The committee edits a Google Sheet; publish it as CSV (File > Share > Publish to web)
+  // and set STATUS_CSV_URL. Expected row 2: state (ok | partial | closed), message, updated (e.g. "jeu. 22/10 à 18h30").
+  var STATUS_CSV_URL = "";
+  var STATES = {
+    ok: { word: "Praticable", tag: "Terrain praticable", detail: "Tous les entraînements et matchs ont lieu normalement. Mis à jour le jeu. 22/10 à 18h30." },
+    partial: { word: "Horaires modifiés", tag: "Matchs de 10h annulés", detail: "Matchs de 10h annulés. Matchs de 11h : MAS à 9h30. Mis à jour le ven. 23/10 à 18h30." },
+    closed: { word: "Impraticable", tag: "Terrain fermé", detail: "Terrain gelé : tous les entraînements et matchs sont annulés aujourd’hui. Mis à jour le sam. 24/10 à 7h45." }
+  };
+  var status = document.getElementById("status");
+  var hero = document.getElementById("hero");
+  function setState(key) {
+    var s = STATES[key];
+    status.dataset.state = key;
+    hero.dataset.state = key;
+    document.getElementById("status-word").textContent = s.word;
+    document.getElementById("status-detail").textContent = s.detail;
+    document.getElementById("pitch-tag-text").textContent = s.tag;
+    document.querySelectorAll(".preview-switch button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.state === key));
+    });
+  }
+  if (STATUS_CSV_URL) {
+    fetch(STATUS_CSV_URL, { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (csv) {
+      var row = (csv.trim().split(/\r?\n/)[1] || "").split(",");
+      var key = (row[0] || "").trim();
+      if (!STATES[key]) return;
+      if (row[1]) STATES[key].detail = row.slice(1, -1).join(",").replace(/^"|"$/g, "").trim() + " Mis à jour le " + (row[row.length - 1] || "").trim() + ".";
+      setState(key);
+    }).catch(function () {});
+  }
+  document.querySelectorAll(".preview-switch button").forEach(function (b) {
+    b.addEventListener("click", function () { setState(b.dataset.state); });
+  });
+
+  var menuBtn = document.getElementById("menu-btn");
+  var mobileNav = document.getElementById("mobile-nav");
+  function setMenu(open) {
+    mobileNav.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    menuBtn.querySelector("use").setAttribute("href", open ? "#i-close" : "#i-menu");
+  }
+  menuBtn.addEventListener("click", function () { setMenu(mobileNav.hidden); });
+  mobileNav.addEventListener("click", function (e) { if (e.target.tagName === "A") setMenu(false); });
+
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var text = el.textContent.trim();
+      var done = function () { btn.textContent = "Adresse copiée"; setTimeout(function () { btn.textContent = "Copier l’adresse"; }, 2000); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { selectText(el); });
+      } else { selectText(el); }
+    });
+  });
+  function selectText(el) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+})();
+</script>
+</body>
+</html>
