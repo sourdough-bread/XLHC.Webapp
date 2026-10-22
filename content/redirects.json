@@ -11,152 +11,207 @@
   },
   {
     "from": "/le-club",
-    "to": "/club",
+    "to": "/club/a-propos",
     "status": 301
   },
   {
     "from": "/le-club/accès",
-    "to": "/club/acces",
+    "to": "/contact",
     "status": 301
   },
   {
     "from": "/le-club/acc%C3%A8s",
-    "to": "/club/acces",
-    "status": 301
-  },
-  {
-    "from": "/le-club/adn",
-    "to": "/club/adn",
-    "status": 301
-  },
-  {
-    "from": "/le-club/business-club",
-    "to": "/club/business-club",
-    "status": 301
-  },
-  {
-    "from": "/le-club/charte",
-    "to": "/club/charte",
-    "status": 301
-  },
-  {
-    "from": "/le-club/roi",
-    "to": "/club/reglement-interieur",
+    "to": "/contact",
     "status": 301
   },
   {
     "from": "/le-club/contact",
-    "to": "/club/contact",
+    "to": "/contact",
     "status": 301
   },
   {
-    "from": "/le-club/cotisations",
-    "to": "/club/cotisations",
+    "from": "/le-club/adn",
+    "to": "/club/a-propos",
     "status": 301
   },
   {
-    "from": "/le-club/equipe",
-    "to": "/club/equipe",
+    "from": "/le-club/charte",
+    "to": "/club/a-propos",
+    "status": 301
+  },
+  {
+    "from": "/le-club/roi",
+    "to": "/club/a-propos",
+    "status": 301
+  },
+  {
+    "from": "/le-club/business-club",
+    "to": "/club/partenaires",
     "status": 301
   },
   {
     "from": "/le-club/sponsoring",
-    "to": "/club/sponsoring",
+    "to": "/club/partenaires",
+    "status": 301
+  },
+  {
+    "from": "/le-club/cotisations",
+    "to": "/rejoindre/cotisations",
+    "status": 301
+  },
+  {
+    "from": "/le-club/equipe",
+    "to": "/club/a-propos",
     "status": 301
   },
   {
     "from": "/le-club/whatsapp",
-    "to": "/club/whatsapp",
+    "to": "/membres/whatsapp",
+    "status": 301
+  },
+  {
+    "from": "/sport",
+    "to": "/membres/sport",
     "status": 301
   },
   {
     "from": "/sport/je-découvre",
-    "to": "/sport/je-decouvre",
+    "to": "/rejoindre/premiers-pas",
     "status": 301
   },
   {
     "from": "/sport/je-d%C3%A9couvre",
-    "to": "/sport/je-decouvre",
+    "to": "/rejoindre/premiers-pas",
+    "status": 301
+  },
+  {
+    "from": "/sport/occupation-du-terrain",
+    "to": "/membres/terrain",
+    "status": 301
+  },
+  {
+    "from": "/sport/entrainements",
+    "to": "/membres/sport",
     "status": 301
   },
   {
     "from": "/sport/rôles",
-    "to": "/sport/roles",
+    "to": "/membres/sport",
     "status": 301
   },
   {
     "from": "/sport/r%C3%B4les",
-    "to": "/sport/roles",
+    "to": "/membres/sport",
+    "status": 301
+  },
+  {
+    "from": "/sport/arbitrage",
+    "to": "/membres/sport",
     "status": 301
   },
   {
     "from": "/sport/règles-du-jeu",
-    "to": "/sport/regles-du-jeu",
+    "to": "/membres/sport",
     "status": 301
   },
   {
     "from": "/sport/r%C3%A8gles-du-jeu",
-    "to": "/sport/regles-du-jeu",
+    "to": "/membres/sport",
+    "status": 301
+  },
+  {
+    "from": "/admin",
+    "to": "/membres",
     "status": 301
   },
   {
     "from": "/admin/conditions-générales",
-    "to": "/admin/conditions-generales",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/conditions-g%C3%A9n%C3%A9rales",
-    "to": "/admin/conditions-generales",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/demande-daffiliation",
-    "to": "/admin/affiliation",
+    "to": "/rejoindre",
     "status": 301
   },
   {
     "from": "/admin/désaffiliation",
-    "to": "/admin/desaffiliation",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/d%C3%A9saffiliation",
-    "to": "/admin/desaffiliation",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/etalement-de-cotisation",
-    "to": "/admin/etalement-cotisation",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/remisereport",
-    "to": "/admin/remise-report",
+    "to": "/membres/documents",
+    "status": 301
+  },
+  {
+    "from": "/admin/attestations-mutuelles",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/déclaration-daccident",
-    "to": "/admin/declaration-accident",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/d%C3%A9claration-daccident",
-    "to": "/admin/declaration-accident",
+    "to": "/membres/documents",
+    "status": 301
+  },
+  {
+    "from": "/admin/app-hockey-belgium",
+    "to": "/membres/documents",
     "status": 301
   },
   {
     "from": "/admin/bénévoles",
-    "to": "/admin/benevoles",
+    "to": "/membres/benevolat",
     "status": 301
   },
   {
     "from": "/admin/b%C3%A9n%C3%A9voles",
-    "to": "/admin/benevoles",
+    "to": "/membres/benevolat",
+    "status": 301
+  },
+  {
+    "from": "/juniors",
+    "to": "/equipes/juniors",
+    "status": 301
+  },
+  {
+    "from": "/juniors/stages",
+    "to": "/equipes/stages",
+    "status": 301
+  },
+  {
+    "from": "/seniors",
+    "to": "/equipes/seniors",
     "status": 301
   },
   {
     "from": "/seniors_1",
-    "to": "/seniors",
+    "to": "/equipes/seniors",
+    "status": 301
+  },
+  {
+    "from": "/xl-card",
+    "to": "/rejoindre/cotisations",
     "status": 301
   },
   {
@@ -166,7 +221,12 @@
   },
   {
     "from": "/events/mixettes",
-    "to": "/evenements/mixettes",
+    "to": "/evenements",
+    "status": 301
+  },
+  {
+    "from": "/meteo",
+    "to": "/membres/terrain",
     "status": 301
   }
 ]
