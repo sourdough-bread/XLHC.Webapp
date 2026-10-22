@@ -1,0 +1,172 @@
+[
+  {
+    "from": "/accueil",
+    "to": "/",
+    "status": 301
+  },
+  {
+    "from": "/actu",
+    "to": "/actualites",
+    "status": 301
+  },
+  {
+    "from": "/le-club",
+    "to": "/club",
+    "status": 301
+  },
+  {
+    "from": "/le-club/accès",
+    "to": "/club/acces",
+    "status": 301
+  },
+  {
+    "from": "/le-club/acc%C3%A8s",
+    "to": "/club/acces",
+    "status": 301
+  },
+  {
+    "from": "/le-club/adn",
+    "to": "/club/adn",
+    "status": 301
+  },
+  {
+    "from": "/le-club/business-club",
+    "to": "/club/business-club",
+    "status": 301
+  },
+  {
+    "from": "/le-club/charte",
+    "to": "/club/charte",
+    "status": 301
+  },
+  {
+    "from": "/le-club/roi",
+    "to": "/club/reglement-interieur",
+    "status": 301
+  },
+  {
+    "from": "/le-club/contact",
+    "to": "/club/contact",
+    "status": 301
+  },
+  {
+    "from": "/le-club/cotisations",
+    "to": "/club/cotisations",
+    "status": 301
+  },
+  {
+    "from": "/le-club/equipe",
+    "to": "/club/equipe",
+    "status": 301
+  },
+  {
+    "from": "/le-club/sponsoring",
+    "to": "/club/sponsoring",
+    "status": 301
+  },
+  {
+    "from": "/le-club/whatsapp",
+    "to": "/club/whatsapp",
+    "status": 301
+  },
+  {
+    "from": "/sport/je-découvre",
+    "to": "/sport/je-decouvre",
+    "status": 301
+  },
+  {
+    "from": "/sport/je-d%C3%A9couvre",
+    "to": "/sport/je-decouvre",
+    "status": 301
+  },
+  {
+    "from": "/sport/rôles",
+    "to": "/sport/roles",
+    "status": 301
+  },
+  {
+    "from": "/sport/r%C3%B4les",
+    "to": "/sport/roles",
+    "status": 301
+  },
+  {
+    "from": "/sport/règles-du-jeu",
+    "to": "/sport/regles-du-jeu",
+    "status": 301
+  },
+  {
+    "from": "/sport/r%C3%A8gles-du-jeu",
+    "to": "/sport/regles-du-jeu",
+    "status": 301
+  },
+  {
+    "from": "/admin/conditions-générales",
+    "to": "/admin/conditions-generales",
+    "status": 301
+  },
+  {
+    "from": "/admin/conditions-g%C3%A9n%C3%A9rales",
+    "to": "/admin/conditions-generales",
+    "status": 301
+  },
+  {
+    "from": "/admin/demande-daffiliation",
+    "to": "/admin/affiliation",
+    "status": 301
+  },
+  {
+    "from": "/admin/désaffiliation",
+    "to": "/admin/desaffiliation",
+    "status": 301
+  },
+  {
+    "from": "/admin/d%C3%A9saffiliation",
+    "to": "/admin/desaffiliation",
+    "status": 301
+  },
+  {
+    "from": "/admin/etalement-de-cotisation",
+    "to": "/admin/etalement-cotisation",
+    "status": 301
+  },
+  {
+    "from": "/admin/remisereport",
+    "to": "/admin/remise-report",
+    "status": 301
+  },
+  {
+    "from": "/admin/déclaration-daccident",
+    "to": "/admin/declaration-accident",
+    "status": 301
+  },
+  {
+    "from": "/admin/d%C3%A9claration-daccident",
+    "to": "/admin/declaration-accident",
+    "status": 301
+  },
+  {
+    "from": "/admin/bénévoles",
+    "to": "/admin/benevoles",
+    "status": 301
+  },
+  {
+    "from": "/admin/b%C3%A9n%C3%A9voles",
+    "to": "/admin/benevoles",
+    "status": 301
+  },
+  {
+    "from": "/seniors_1",
+    "to": "/seniors",
+    "status": 301
+  },
+  {
+    "from": "/events",
+    "to": "/evenements",
+    "status": 301
+  },
+  {
+    "from": "/events/mixettes",
+    "to": "/evenements/mixettes",
+    "status": 301
+  }
+]
