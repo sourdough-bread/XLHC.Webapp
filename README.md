@@ -4,7 +4,21 @@ Le site web de l'Ixelles Hockey Club, pensé d'abord pour le téléphone. Il est
 
 ## Modifier le contenu
 
-Tout le texte du site se trouve dans des fichiers texte (Markdown ou YAML). On peut les modifier directement sur GitHub avec le bouton crayon ; un éditeur web (Decap ou Pages CMS) viendra s'y brancher.
+Tout le texte du site se trouve dans des fichiers texte (Markdown, YAML ou JSON) de ce dépôt.
+
+### Avec l'éditeur web (recommandé pour les bénévoles)
+
+Le site est configuré pour [Pages CMS](https://pagescms.org), un éditeur web gratuit (fichier `.pages.yml`).
+
+1. Un administrateur ouvre [app.pagescms.org](https://app.pagescms.org), se connecte avec GitHub et choisit le dépôt `XLHC.Webapp`.
+2. Il invite les bénévoles par e-mail depuis l'éditeur : ils n'ont pas besoin de compte GitHub.
+3. Les bénévoles modifient les actus, événements, stages, équipes, pages et réglages via des formulaires. Chaque enregistrement met le site à jour en une minute environ.
+
+Dans le texte d'une page, deux choses passent mieux en mode « Source » de l'éditeur : les tableaux et les ancres de titre (`{#ancre}`).
+
+### Directement dans les fichiers
+
+On peut aussi modifier les fichiers sur GitHub avec le bouton crayon.
 
 | Quoi | Où |
 | --- | --- |
@@ -14,7 +28,8 @@ Tout le texte du site se trouve dans des fichiers texte (Markdown ou YAML). On p
 | Événements (dates, inscription Twizzit) | `src/content/events/` |
 | Stages (dates, âges, prix, réservation Twizzit) | `src/content/camps/` |
 | Équipes (cartes des pages Juniors et Seniors) | `src/content/teams/` |
-| Coordonnées, liens Twizzit, état du terrain, partenaires, pouvoirs publics | `src/data/site.ts` |
+| Coordonnées, liens Twizzit, état du terrain, partenaires, pouvoirs publics | `src/data/settings.json` |
+| Images | `public/media/` |
 | Textes de l'interface (menu, boutons) en FR et EN | `src/i18n/ui.ts` |
 | Anciennes adresses redirigées | `astro.config.mjs` |
 | Couleurs et police | `src/styles/global.css` |
@@ -43,8 +58,8 @@ La page apparaît automatiquement dans le menu, à l'adresse `/club/historique/`
 - `order` : position dans le menu (plus petit = plus haut).
 - `hidden: true` : retire la page du menu sans la supprimer.
 - `translationKey` : même valeur sur la version FR et EN d'une page, pour que le bouton FR/EN mène à la bonne page.
-- `image` et `imageAlt` : image de partage ; le texte alternatif est obligatoire dès qu'il y a une image.
-- `actions` : boutons sous le titre. `twizzit:join` et `twizzit:trial` renvoient aux liens Twizzit de `src/data/site.ts` (le bouton reste caché tant que le lien est vide).
+- `image` et `imageAlt` : image de partage (chemin dans `public/media/`, par exemple `/media/tournoi.jpg`) ; le texte alternatif est obligatoire dès qu'il y a une image.
+- `actions` : boutons sous le titre. `twizzit:join` et `twizzit:trial` renvoient aux liens Twizzit des réglages du site (le bouton reste caché tant que le lien est vide).
 - `listing` : ajoute une liste après le texte (`news`, `events`, `camps`, `juniors`, `seniors` ou `partners`).
 
 Le fichier `index.md` d'un dossier est la page d'accueil de la section.
@@ -71,7 +86,7 @@ Un fichier `.yml` par événement ou par stage. Les dates passées disparaissent
 
 ### État du terrain
 
-Le bandeau en haut de chaque page lit l'état du terrain en direct depuis une feuille Google publiée en CSV, alimentée par un Google Form rempli depuis un téléphone. Colonnes : horodatage, état (Praticable / Incertain / Impraticable), remarque. Collez l'adresse CSV dans `pitch.sheetCsvUrl` de `src/data/site.ts`. Tant qu'elle est vide, c'est `pitch.fallback` qui s'affiche.
+Le bandeau en haut de chaque page lit l'état du terrain en direct depuis une feuille Google publiée en CSV, alimentée par un Google Form rempli depuis un téléphone. Colonnes : horodatage, état (Praticable / Incertain / Impraticable), remarque. Collez l'adresse CSV dans « Réglages du site » de l'éditeur (`pitchSheetCsvUrl` dans `src/data/settings.json`). Tant qu'elle est vide, c'est l'état choisi dans `pitchFallbackStatus` qui s'affiche.
 
 ## Développement
 

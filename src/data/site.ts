@@ -1,35 +1,36 @@
-// Réglages généraux du site. Modifiez ici les coordonnées, liens et partenaires.
+// Les réglages modifiables (coordonnées, liens, partenaires) sont dans settings.json,
+// éditable depuis Pages CMS. Ce fichier ajoute ce qui touche à la structure du site.
 import type { Locale } from '../i18n/ui';
+import settings from './settings.json';
 
 export const site = {
-  name: 'Ixelles Hockey Club',
-  shortName: 'Ixelles HC',
-  address: 'Rue Volta 18, 1050 Ixelles',
-  // Lien « ouvrir dans Maps » de la page Contact (pas de carte intégrée, donc pas de cookies).
-  mapUrl: 'https://www.openstreetmap.org/search?query=Rue%20Volta%2018%2C%201050%20Ixelles',
-  email: 'manager@ixelles.hockey',
+  name: settings.name,
+  shortName: settings.shortName,
+  address: settings.address,
+  // Lien « ouvrir dans Maps » (pas de carte intégrée, donc pas de cookies).
+  mapUrl: settings.mapUrl,
+  email: settings.email,
   social: {
-    facebook: 'https://www.facebook.com/IxellesHC',
-    instagram: 'https://www.instagram.com/ixelles_hockey_club',
-    whatsapp: '/membres/whatsapp/',
+    facebook: settings.facebook,
+    instagram: settings.instagram,
+    whatsapp: settings.whatsapp,
   },
-  // Liens Twizzit (inscription, séance d'essai). À compléter quand les formulaires existent.
+  // Liens Twizzit (inscription, séance d'essai). Vides tant que les formulaires n'existent pas.
   twizzit: {
-    join: '',
-    trial: '',
+    join: settings.twizzitJoin,
+    trial: settings.twizzitTrial,
   },
-  hockeyBelgiumRules: 'https://www.hockey.be',
 };
 
 // État du terrain, affiché en haut de chaque page.
 // Si sheetCsvUrl est rempli (feuille Google publiée en CSV, alimentée par un Google Form),
 // le site lit la dernière ligne en direct : horodatage, état, remarque.
-// Sinon, il affiche la valeur « fallback » ci-dessous.
+// Sinon, il affiche la valeur « fallback ».
 export const pitch = {
-  sheetCsvUrl: '',
+  sheetCsvUrl: settings.pitchSheetCsvUrl,
   fallback: {
-    status: 'ok' as PitchStatus,
-    note: '',
+    status: settings.pitchFallbackStatus as PitchStatus,
+    note: settings.pitchFallbackNote,
   },
 };
 
@@ -57,19 +58,7 @@ export const sections: Record<Locale, { slug: string; label: string }[]> = {
   ],
 };
 
-export const partners = [
-  { name: 'Hockey-Player', url: '' },
-  { name: 'Weinvest', url: '' },
-  { name: 'BX1', url: '' },
-  { name: 'Digitribe', url: '' },
-  { name: 'Victor Avocats', url: '' },
-];
+export const partners = settings.partners;
 
 // Pouvoirs publics, affichés dans le pied de page (souvent exigé par les subsides).
-export const funders = [
-  { name: 'ADEPS' },
-  { name: 'COCOF' },
-  { name: 'Région de Bruxelles-Capitale' },
-  { name: 'Centre Sportif Ixellois' },
-  { name: 'Commune d’Ixelles' },
-];
+export const funders = settings.funders;

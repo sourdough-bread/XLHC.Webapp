@@ -9,48 +9,52 @@ const withImageAlt = <T extends { image?: unknown; imageAlt?: string }>(data: T,
   }
 };
 
+// L'éditeur web enregistre parfois un champ vide ("" ou null) : on le traite comme absent.
+const blank = <T extends z.ZodTypeAny>(schema: T) =>
+  z.preprocess((v) => (v === '' || v === null ? undefined : v), schema);
+
 const action = z.object({ label: z.string(), href: z.string() });
 
 // Pages du site : src/content/pages/<langue>/<section>/<page>.md
 // Le fichier index.md d'un dossier est la page d'accueil de la section.
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
-  schema: ({ image }) =>
-    z
-      .object({
-        title: z.string(),
-        // Résumé d'une ou deux phrases, utilisé par Google et les partages.
-        description: z.string().min(20),
-        // Position dans le menu (plus petit = plus haut).
-        order: z.number().default(100),
-        // Masquer la page du menu sans la supprimer.
-        hidden: z.boolean().default(false),
-        // Même valeur sur la version française et anglaise d'une page.
-        translationKey: z.string().optional(),
-        // Boutons affichés sous le titre (inscription Twizzit, etc.).
-        actions: z.array(action).default([]),
-        // Liste affichée après le texte de la page.
-        listing: z.enum(['news', 'events', 'camps', 'juniors', 'seniors', 'partners']).optional(),
-        image: image().optional(),
-        imageAlt: z.string().optional(),
-      })
-      .superRefine(withImageAlt),
+  schema: z
+    .object({
+      title: z.string(),
+      // Résumé d'une ou deux phrases, utilisé par Google et les partages.
+      description: z.string().min(20),
+      // Position dans le menu (plus petit = plus haut).
+      order: blank(z.number().default(100)),
+      // Masquer la page du menu sans la supprimer.
+      hidden: blank(z.boolean().default(false)),
+      // Même valeur sur la version française et anglaise d'une page.
+      translationKey: blank(z.string().optional()),
+      // Boutons affichés sous le titre (inscription Twizzit, etc.).
+      actions: blank(z.array(action).default([])),
+      // Liste affichée après le texte de la page.
+      listing: blank(z.enum(['news', 'events', 'camps', 'juniors', 'seniors', 'partners']).optional()),
+      // Chemin d'une image de public/media, par exemple /media/tournoi.jpg.
+      image: blank(z.string().optional()),
+      imageAlt: blank(z.string().optional()),
+    })
+    .superRefine(withImageAlt),
 });
 
 // Actualités : src/content/news/<date>-<titre>.md
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
-  schema: ({ image }) =>
-    z
-      .object({
-        title: z.string(),
-        date: z.coerce.date(),
-        description: z.string().min(20),
-        image: image().optional(),
-        imageAlt: z.string().optional(),
-        draft: z.boolean().default(false),
-      })
-      .superRefine(withImageAlt),
+  schema: z
+    .object({
+      title: z.string(),
+      date: z.coerce.date(),
+      description: z.string().min(20),
+      // Chemin d'une image de public/media, par exemple /media/tournoi.jpg.
+      image: blank(z.string().optional()),
+      imageAlt: blank(z.string().optional()),
+      draft: blank(z.boolean().default(false)),
+    })
+    .superRefine(withImageAlt),
 });
 
 // Événements : src/content/events/<date>-<nom>.yml
@@ -59,11 +63,11 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    endDate: z.coerce.date().optional(),
-    location: z.string().optional(),
-    summary: z.string().optional(),
+    endDate: blank(z.coerce.date().optional()),
+    location: blank(z.string().optional()),
+    summary: blank(z.string().optional()),
     // Lien d'inscription Twizzit.
-    signupUrl: z.string().url().optional(),
+    signupUrl: blank(z.string().url().optional()),
   }),
 });
 
@@ -76,9 +80,9 @@ const camps = defineCollection({
     endDate: z.coerce.date(),
     ages: z.string(),
     price: z.string(),
-    summary: z.string().optional(),
+    summary: blank(z.string().optional()),
     // Lien de réservation et paiement Twizzit.
-    bookingUrl: z.string().url().optional(),
+    bookingUrl: blank(z.string().url().optional()),
   }),
 });
 
@@ -90,12 +94,12 @@ const teams = defineCollection({
     category: z.enum(['juniors', 'seniors']),
     // Catégorie d'âge (juniors) ou division (seniors).
     level: z.string(),
-    training: z.string().optional(),
-    hockeyBelgiumUrl: z.string().url().optional(),
+    training: blank(z.string().optional()),
+    hockeyBelgiumUrl: blank(z.string().url().optional()),
     // Adresse de rôle (juniors@…), jamais une adresse personnelle.
-    email: z.string().email().optional(),
-    recruiting: z.boolean().default(false),
-    order: z.number().default(100),
+    email: blank(z.string().email().optional()),
+    recruiting: blank(z.boolean().default(false)),
+    order: blank(z.number().default(100)),
   }),
 });
 

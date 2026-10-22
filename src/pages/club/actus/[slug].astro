@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getNews } from '../../../data/content';
@@ -23,7 +22,7 @@ const { Content } = await render(item);
     </p>
     {
       item.data.image && (
-        <Image class="cover" src={item.data.image} alt={item.data.imageAlt ?? ''} widths={[400, 800, 1200]} sizes="(min-width: 960px) 44rem, 100vw" />
+        <img class="cover" src={item.data.image} alt={item.data.imageAlt ?? ''} />
       )
     }
     <div class="prose">

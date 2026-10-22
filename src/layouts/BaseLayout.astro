@@ -1,6 +1,4 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import PitchBanner from '../components/PitchBanner.astro';
 import Footer from '../components/Footer.astro';
@@ -12,7 +10,7 @@ interface Props {
   locale?: Locale;
   title?: string;
   description?: string;
-  image?: ImageMetadata;
+  image?: string;
   // Adresse de la même page dans l'autre langue (sinon, l'accueil de l'autre langue).
   translationHref?: string;
 }
@@ -22,7 +20,7 @@ const otherLocale = locale === 'fr' ? 'en' : 'fr';
 const translationHref = Astro.props.translationHref ?? homeHref(otherLocale);
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image && new URL((await getImage({ src: image, width: 1200 })).src, Astro.site);
+const ogImage = image && new URL(image, Astro.site);
 ---
 
 <!doctype html>

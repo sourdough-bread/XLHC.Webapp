@@ -1,0 +1,407 @@
+# Configuration de l'éditeur web Pages CMS (https://pagescms.org).
+# Chaque bloc « content » devient une rubrique dans l'éditeur.
+
+media:
+  input: public/media
+  output: /media
+  rename: safe
+
+content:
+  - name: news
+    label: Actualités
+    type: collection
+    path: src/content/news
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, date, draft]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: description
+        label: Résumé (une ou deux phrases, affiché dans la liste et sur Google)
+        type: text
+        required: true
+      - name: image
+        label: Photo
+        type: image
+      - name: imageAlt
+        label: Description de la photo (pour les malvoyants, obligatoire s'il y a une photo)
+        type: string
+      - name: draft
+        label: Brouillon (ne pas publier)
+        type: boolean
+        default: false
+      - name: body
+        label: Texte
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: events
+    label: Événements
+    type: collection
+    path: src/content/events
+    format: yaml
+    filename: "{year}-{month}-{day}-{primary}.yml"
+    view:
+      primary: title
+      fields: [title, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Nom
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: endDate
+        label: Date de fin (si plusieurs jours)
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: location
+        label: Lieu
+        type: string
+      - name: summary
+        label: Description courte
+        type: text
+      - name: signupUrl
+        label: Lien d'inscription Twizzit
+        type: string
+
+  - name: camps
+    label: Stages
+    type: collection
+    path: src/content/camps
+    format: yaml
+    filename: "{year}-{month}-{day}-{primary}.yml"
+    view:
+      primary: title
+      fields: [title, startDate, ages]
+      default:
+        sort: startDate
+        order: desc
+    fields:
+      - name: title
+        label: Nom
+        type: string
+        required: true
+      - name: startDate
+        label: Premier jour
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: endDate
+        label: Dernier jour
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: ages
+        label: Âges
+        type: string
+        required: true
+      - name: price
+        label: Prix
+        type: string
+        required: true
+      - name: summary
+        label: Description courte
+        type: text
+      - name: bookingUrl
+        label: Lien de réservation Twizzit
+        type: string
+
+  - name: teams
+    label: Équipes
+    type: collection
+    path: src/content/teams
+    format: yaml
+    filename: "{primary}.yml"
+    view:
+      primary: name
+      fields: [name, category, recruiting]
+      default:
+        sort: name
+    fields:
+      - name: name
+        label: Nom de l'équipe
+        type: string
+        required: true
+      - name: category
+        label: Catégorie
+        type: select
+        required: true
+        options:
+          values:
+            - name: juniors
+              label: Juniors
+            - name: seniors
+              label: Seniors
+      - name: level
+        label: Âge (juniors) ou division (seniors)
+        type: string
+        required: true
+      - name: training
+        label: Entraînement (jour et heure)
+        type: string
+      - name: hockeyBelgiumUrl
+        label: Lien de la page Hockey Belgium (matchs et résultats)
+        type: string
+      - name: email
+        label: Adresse e-mail de rôle (jamais une adresse personnelle)
+        type: string
+      - name: recruiting
+        label: L'équipe recrute
+        type: boolean
+        default: false
+      - name: order
+        label: Ordre d'affichage (plus petit = plus haut)
+        type: number
+        default: 100
+
+  - name: pages-fr
+    label: Pages (français)
+    type: collection
+    path: src/content/pages/fr
+    subfolders: true
+    view:
+      primary: title
+      fields: [title, order]
+      layout: tree
+      node:
+        filename: index.md
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: description
+        label: Résumé (une ou deux phrases, pour Google et les partages)
+        type: text
+        required: true
+      - name: order
+        label: Position dans le menu (plus petit = plus haut)
+        type: number
+        default: 100
+      - name: hidden
+        label: Masquer du menu
+        type: boolean
+        default: false
+      - name: translationKey
+        label: Clé de traduction (même valeur sur la page FR et EN)
+        type: string
+      - name: actions
+        label: Boutons sous le titre
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Texte du bouton
+            type: string
+            required: true
+          - name: href
+            label: Lien (ou twizzit:join / twizzit:trial)
+            type: string
+            required: true
+      - name: listing
+        label: Liste affichée après le texte
+        type: select
+        options:
+          values:
+            - name: news
+              label: Actualités
+            - name: events
+              label: Événements
+            - name: camps
+              label: Stages
+            - name: juniors
+              label: Équipes juniors
+            - name: seniors
+              label: Équipes seniors
+            - name: partners
+              label: Partenaires
+      - name: image
+        label: Image de partage
+        type: image
+      - name: imageAlt
+        label: Description de l'image (obligatoire s'il y a une image)
+        type: string
+      - name: body
+        label: Texte
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: pages-en
+    label: Pages (English)
+    type: collection
+    path: src/content/pages/en
+    subfolders: true
+    view:
+      primary: title
+      fields: [title, order]
+      layout: tree
+      node:
+        filename: index.md
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: description
+        label: Résumé (une ou deux phrases, pour Google et les partages)
+        type: text
+        required: true
+      - name: order
+        label: Position dans le menu (plus petit = plus haut)
+        type: number
+        default: 100
+      - name: hidden
+        label: Masquer du menu
+        type: boolean
+        default: false
+      - name: translationKey
+        label: Clé de traduction (même valeur sur la page FR et EN)
+        type: string
+      - name: actions
+        label: Boutons sous le titre
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Texte du bouton
+            type: string
+            required: true
+          - name: href
+            label: Lien (ou twizzit:join / twizzit:trial)
+            type: string
+            required: true
+      - name: listing
+        label: Liste affichée après le texte
+        type: select
+        options:
+          values:
+            - name: news
+              label: Actualités
+            - name: events
+              label: Événements
+            - name: camps
+              label: Stages
+            - name: juniors
+              label: Équipes juniors
+            - name: seniors
+              label: Équipes seniors
+            - name: partners
+              label: Partenaires
+      - name: image
+        label: Image de partage
+        type: image
+      - name: imageAlt
+        label: Description de l'image (obligatoire s'il y a une image)
+        type: string
+      - name: body
+        label: Texte
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: settings
+    label: Réglages du site
+    type: file
+    path: src/data/settings.json
+    format: json
+    fields:
+      - name: name
+        label: Nom du club
+        type: string
+        required: true
+      - name: shortName
+        label: Nom court (en-tête)
+        type: string
+        required: true
+      - name: address
+        label: Adresse
+        type: string
+        required: true
+      - name: mapUrl
+        label: Lien « Ouvrir dans Maps »
+        type: string
+      - name: email
+        label: E-mail du club
+        type: string
+        required: true
+      - name: facebook
+        label: Page Facebook
+        type: string
+      - name: instagram
+        label: Compte Instagram
+        type: string
+      - name: whatsapp
+        label: Lien WhatsApp (pied de page)
+        type: string
+      - name: twizzitJoin
+        label: Lien Twizzit d'inscription
+        type: string
+      - name: twizzitTrial
+        label: Lien Twizzit de séance d'essai
+        type: string
+      - name: pitchSheetCsvUrl
+        label: État du terrain, adresse CSV de la feuille Google publiée
+        type: string
+      - name: pitchFallbackStatus
+        label: État du terrain si la feuille n'est pas lisible
+        type: select
+        options:
+          values:
+            - name: ok
+              label: Praticable
+            - name: warning
+              label: Incertain
+            - name: closed
+              label: Impraticable
+      - name: pitchFallbackNote
+        label: Remarque sur le terrain
+        type: string
+      - name: partners
+        label: Partenaires
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Nom
+            type: string
+            required: true
+          - name: url
+            label: Site web
+            type: string
+      - name: funders
+        label: Pouvoirs publics (pied de page)
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Nom
+            type: string
+            required: true
