@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getNavigation, pageHref } from '../data/navigation';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: pageHref(page.id).slice(1, -1) },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+
+const href = pageHref(page.id);
+const nav = await getNavigation();
+const section = nav.find((s) => href.startsWith(s.href));
+const isSectionIndex = section?.href === href;
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <div class="container page">
+    {
+      section && !isSectionIndex && (
+        <p class="breadcrumb">
+          <a href={section.href}>{section.label}</a>
+        </p>
+      )
+    }
+    <h1>{page.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+    {
+      isSectionIndex && section.children.length > 0 && (
+        <ul class="card-grid">
+          {section.children.map((child) => (
+            <li>
+              <a class="card" href={child.href}>
+                <h2>{child.label}</h2>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

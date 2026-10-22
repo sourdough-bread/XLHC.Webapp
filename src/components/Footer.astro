@@ -1,0 +1,74 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container grid">
+    <div>
+      <p class="name">{site.name}</p>
+      <address>
+        {site.address}<br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </address>
+    </div>
+    <nav aria-label="Réseaux sociaux">
+      <ul>
+        <li><a href={site.social.facebook} rel="noopener">Facebook</a></li>
+        <li><a href={site.social.instagram} rel="noopener">Instagram</a></li>
+        <li><a href={site.social.whatsapp}>WhatsApp</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Liens utiles">
+      <ul>
+        <li><a href="/admin/demande-d-affiliation/">S'affilier</a></li>
+        <li><a href="/le-club/contact/">Contact</a></li>
+        <li><a href="/le-club/acces/">Accès</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="container copy">© {new Date().getFullYear()} {site.name}, ASBL</p>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 3rem;
+    padding-block: 2rem 1rem;
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  }
+
+  .name {
+    margin: 0 0 0.25rem;
+    font-weight: 700;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li + li {
+    margin-top: 0.35rem;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .copy {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
+</style>
