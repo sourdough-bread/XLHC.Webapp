@@ -1,6 +1,7 @@
 /* Couleurs et typographie du site. Ajustez les variables pour suivre la charte du club. */
 :root {
   --color-primary: #027537;
+  --color-primary-dark: #014a24;
   --color-primary-contrast: #ffffff;
   --color-accent: #38761d;
   --color-bg: #ffffff;

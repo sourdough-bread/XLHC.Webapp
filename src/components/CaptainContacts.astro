@@ -1,0 +1,83 @@
+---
+import { getCaptainContacts } from '../data/content';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+// Pour les clubs adverses : une adresse de rôle par équipe (dames1@…), transférée au capitaine
+// de la saison. On n'affiche jamais d'adresse personnelle. Une équipe sans e-mail n'apparaît pas.
+const { locale } = Astro.props;
+const t = ui[locale];
+const teams = await getCaptainContacts();
+---
+
+{
+  teams.length > 0 && (
+    <section aria-labelledby="captains">
+      <h2 id="captains">{t.captainsTitle}</h2>
+      <ul class="captains">
+        {teams.map(({ data }) => (
+          <li>
+            <span>
+              <strong>{data.name}</strong>
+              <span class="email">{data.email}</span>
+            </span>
+            <a class="button primary small" href={`mailto:${data.email}`}>
+              {t.write}
+              <span class="visually-hidden"> {data.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="note">{t.captainsNote}</p>
+    </section>
+  )
+}
+
+<style>
+  .captains {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 16px;
+    background: var(--color-surface);
+  }
+
+  li > span {
+    flex: 1;
+    min-width: 0;
+  }
+
+  strong,
+  .email {
+    display: block;
+  }
+
+  .email {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+  }
+
+  .button.small {
+    margin: 0;
+  }
+
+  .note {
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+</style>

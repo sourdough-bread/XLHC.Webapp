@@ -27,9 +27,10 @@ On peut aussi modifier les fichiers sur GitHub avec le bouton crayon.
 | Actualités | `src/content/news/` |
 | Événements (dates, inscription Twizzit) | `src/content/events/` |
 | Stages (dates, âges, prix, réservation Twizzit) | `src/content/camps/` |
-| Équipes (cartes des pages Juniors et Seniors) | `src/content/teams/` |
+| Équipes (cartes des pages Juniors et Seniors, adresse des capitaines sur l'accueil) | `src/content/teams/` |
+| Matchs et résultats (bandeau vert sous la photo d'accueil) | `src/content/matches/` |
 | Coordonnées, liens Twizzit, état du terrain, partenaires, pouvoirs publics | `src/data/settings.json` |
-| Images | `public/media/` |
+| Images (photos de l'accueil dans `public/media/photos/`) | `public/media/` |
 | Textes de l'interface (menu, boutons) en FR et EN | `src/i18n/ui.ts` |
 | Anciennes adresses redirigées | `astro.config.mjs` |
 | Couleurs et police | `src/styles/global.css` |

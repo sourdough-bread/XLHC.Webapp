@@ -88,6 +88,50 @@ content:
       - name: signupUrl
         label: Lien d'inscription Twizzit
         type: string
+      - name: image
+        label: Photo en vignette sur l'accueil (facultatif, sinon une photo du club)
+        type: image
+
+  - name: matches
+    label: Matchs et résultats
+    type: collection
+    path: src/content/matches
+    format: yaml
+    filename: "{year}-{month}-{day}-{primary}.yml"
+    view:
+      primary: team
+      fields: [team, opponent, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: team
+        label: Équipe (comme sur la carte d'équipe, par exemple Dames 1)
+        type: string
+        required: true
+      - name: opponent
+        label: Adversaire
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: time
+        label: Heure (par exemple 15:00)
+        type: string
+      - name: home
+        label: À domicile
+        type: boolean
+        default: true
+      - name: scoreFor
+        label: Buts d'Ixelles (laisser vide avant le match)
+        type: number
+      - name: scoreAgainst
+        label: Buts de l'adversaire (laisser vide avant le match)
+        type: number
 
   - name: camps
     label: Stages
@@ -170,7 +214,7 @@ content:
         label: Lien de la page Hockey Belgium (matchs et résultats)
         type: string
       - name: email
-        label: Adresse e-mail de rôle (jamais une adresse personnelle)
+        label: Adresse e-mail de rôle, transférée au capitaine (jamais une adresse personnelle). Affichée sur l'accueil pour les clubs adverses.
         type: string
       - name: recruiting
         label: L'équipe recrute

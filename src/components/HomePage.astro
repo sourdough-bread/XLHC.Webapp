@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NewsList from './NewsList.astro';
-import EventList from './EventList.astro';
 import PartnerList from './PartnerList.astro';
 import MainSponsor from './MainSponsor.astro';
+import Scoreboard from './Scoreboard.astro';
+import CaptainContacts from './CaptainContacts.astro';
 import { partnersHref } from '../data/site';
 import { getNews, getUpcomingEvents } from '../data/content';
-import { homeHref, ui, type Locale } from '../i18n/ui';
+import { dateFormat, homeHref, ui, type Locale } from '../i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -16,65 +16,110 @@ const { locale } = Astro.props;
 const t = ui[locale];
 const otherLocale = locale === 'fr' ? 'en' : 'fr';
 
-const latestNews = (await getNews()).slice(0, 3);
+const latestNews = (await getNews()).slice(0, 6);
 const nextEvents = (await getUpcomingEvents()).slice(0, 3);
+
+// Photos du club, dans public/media/photos. Une actu ou un événement sans photo reprend l'une d'elles.
+const photos = {
+  hero: '/media/photos/juniors-en-course.jpg',
+  teams: '/media/photos/equipe-juniors.jpg',
+  fees: '/media/photos/stick-et-balle.jpg',
+  members: '/media/photos/soiree-club.jpg',
+  access: '/media/photos/terrain.jpg',
+  news: ['/media/photos/balcon-club-house.jpg', '/media/photos/apero-benevoles.jpg', '/media/photos/club-house-panorama.jpg'],
+  events: ['/media/photos/stage-juniors.jpg', '/media/photos/equipe-juniors.jpg', '/media/photos/terrain.jpg'],
+};
 
 const copy = {
   fr: {
-    title: "Bienvenue à l'Ixelles Hockey Club",
-    lead: 'Des juniors dès 5 ans aux seniors, débutants ou confirmés : tout le monde a sa place sur le terrain.',
+    title: 'Ici, on joue ensemble',
+    lead: 'Des juniors dès 5 ans aux seniors, débutants ou confirmés.',
+    heroAlt: "Trois juniors de l'Ixelles Hockey Club courent sur le terrain, crosse en main",
     joinHref: '/rejoindre/',
     tryHref: '/rejoindre/premiers-pas/',
+    tryShort: 'Essayer',
+    clubTitle: 'Le club',
     links: [
-      { href: '/equipes/', title: 'Équipes', text: 'Juniors, seniors et stages de vacances.' },
-      { href: '/rejoindre/cotisations/', title: 'Cotisations', text: 'Les prix de la saison, sans surprise.' },
-      { href: '/membres/', title: 'Membres', text: 'Terrain, formalités, bénévolat, WhatsApp.' },
-      { href: '/contact/', title: 'Contact et accès', text: 'Adresse, transports et e-mails.' },
+      { href: '/equipes/', title: 'Équipes', text: 'Juniors, seniors, loisirs', image: photos.teams },
+      { href: '/rejoindre/cotisations/', title: 'Cotisations', text: 'Les prix de la saison', image: photos.fees },
+      { href: '/membres/', title: 'Membres', text: 'Terrain, bénévolat, WhatsApp', image: photos.members },
+      { href: '/contact/', title: 'Contact et accès', text: 'Adresse et transports', image: photos.access },
     ],
+    teamLinks: [
+      { href: '/equipes/seniors/', label: 'Dames 1' },
+      { href: '/equipes/seniors/', label: 'Messieurs 1' },
+      { href: '/equipes/juniors/', label: 'Juniors' },
+    ],
+    newsTitle: 'En images',
+    eventsTitle: 'Prochainement',
     newsHref: '/club/actus/',
     eventsHref: '/club/evenements/',
   },
   en: {
-    title: 'Welcome to Ixelles Hockey Club',
-    lead: 'From juniors aged 5 to seniors, beginners or experienced: everyone has a place on the pitch.',
+    title: 'Here, we play together',
+    lead: 'From juniors aged 5 to seniors, beginners or experienced.',
+    heroAlt: 'Three Ixelles Hockey Club juniors running on the pitch with their sticks',
     joinHref: '/en/join/',
     tryHref: '/en/join/getting-started/',
+    tryShort: 'Try it',
+    clubTitle: 'The club',
     links: [
-      { href: '/en/teams/juniors/', title: 'Juniors', text: 'The youth school, from age 5.' },
-      { href: '/en/teams/seniors/', title: 'Seniors', text: "Women's, men's and mixed teams." },
-      { href: '/en/join/fees/', title: 'Fees', text: "This season's prices, up front." },
-      { href: '/en/contact/', title: 'Contact and access', text: 'Address, transport and email.' },
+      { href: '/en/teams/juniors/', title: 'Juniors', text: 'The youth school, from age 5', image: photos.teams },
+      { href: '/en/teams/seniors/', title: 'Seniors', text: "Women's, men's and mixed", image: photos.members },
+      { href: '/en/join/fees/', title: 'Fees', text: "This season's prices", image: photos.fees },
+      { href: '/en/contact/', title: 'Contact and access', text: 'Address and transport', image: photos.access },
     ],
+    teamLinks: [
+      { href: '/en/teams/seniors/', label: "Women's 1" },
+      { href: '/en/teams/seniors/', label: "Men's 1" },
+      { href: '/en/teams/juniors/', label: 'Juniors' },
+    ],
+    newsTitle: 'In pictures',
+    eventsTitle: 'Coming up',
     newsHref: '/club/actus/',
     eventsHref: '/club/evenements/',
   },
 }[locale];
 ---
 
-<BaseLayout locale={locale} translationHref={homeHref(otherLocale)}>
+<BaseLayout locale={locale} translationHref={homeHref(otherLocale)} image={photos.hero}>
+  <nav class="team-links container" aria-label={t.teamsNav}>
+    {copy.teamLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+  </nav>
+
   <section class="hero">
-    <div class="container">
-      <h1>{copy.title}</h1>
-      <p class="lead">{copy.lead}</p>
-      <p class="actions">
-        <a class="button primary" href={copy.joinHref}>{t.join}</a>
-        <a class="button" href={copy.tryHref}>{t.tryIt}</a>
-      </p>
-      <div class="hero-sponsor">
-        <MainSponsor locale={locale} />
+    <img src={photos.hero} alt={copy.heroAlt} width="938" height="938" fetchpriority="high" />
+    <div class="hero-text">
+      <div class="container">
+        <h1>{copy.title}</h1>
+        <p class="lead">{copy.lead}</p>
+        <p class="actions">
+          <a class="button light" href={copy.joinHref}>{t.join}</a>
+          <a class="button outline" href={copy.tryHref}>{copy.tryShort}</a>
+        </p>
       </div>
     </div>
   </section>
 
+  <Scoreboard locale={locale} />
+
   <div class="container">
-    <section>
-      <ul class="card-grid">
+    <div class="home-sponsor">
+      <MainSponsor locale={locale} />
+    </div>
+
+    <section aria-labelledby="club">
+      <h2 id="club">{copy.clubTitle}</h2>
+      <ul class="photo-cards">
         {
           copy.links.map((link) => (
             <li>
-              <a class="card" href={link.href}>
-                <h2>{link.title}</h2>
-                <p>{link.text}</p>
+              <a class="photo-card" href={link.href}>
+                <img src={link.image} alt="" loading="lazy" width="900" height="900" />
+                <span class="photo-card-text">
+                  <span class="photo-card-title">{link.title}</span>
+                  <span>{link.text}</span>
+                </span>
               </a>
             </li>
           ))
@@ -85,8 +130,24 @@ const copy = {
     {
       latestNews.length > 0 && (
         <section aria-labelledby="news">
-          <h2 id="news">{t.latestNews}</h2>
-          <NewsList items={latestNews} locale={locale} />
+          <h2 id="news">{copy.newsTitle}</h2>
+          <ul class="news-strip">
+            {latestNews.map((item, i) => (
+              <li>
+                <a href={`/club/actus/${item.id}/`}>
+                  <img
+                    src={item.data.image ?? photos.news[i % photos.news.length]}
+                    alt={item.data.image ? (item.data.imageAlt ?? '') : ''}
+                    loading="lazy"
+                  />
+                  <span class="news-text">
+                    <time datetime={item.data.date.toISOString()}>{dateFormat(locale, item.data.date, { year: undefined })}</time>
+                    <span class="news-title">{item.data.title}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
           <p><a href={copy.newsHref}>{t.allNews} →</a></p>
         </section>
       )
@@ -95,55 +156,309 @@ const copy = {
     {
       nextEvents.length > 0 && (
         <section aria-labelledby="events">
-          <h2 id="events">{t.nextEvents}</h2>
-          <EventList items={nextEvents} locale={locale} />
+          <h2 id="events">{copy.eventsTitle}</h2>
+          <ul class="event-rows">
+            {nextEvents.map((item, i) => (
+              <li data-end={(item.data.endDate ?? item.data.date).toISOString()}>
+                <span class="event-thumb">
+                  <img src={item.data.image ?? photos.events[i % photos.events.length]} alt="" loading="lazy" />
+                  <span class="event-date">{dateFormat(locale, item.data.date, { year: undefined, month: 'short' })}</span>
+                </span>
+                <span>
+                  <strong>{item.data.title}</strong>
+                  {(item.data.location || item.data.summary) && <span class="event-meta">{item.data.location ?? item.data.summary}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
           <p><a href={copy.eventsHref}>{t.allEvents} →</a></p>
         </section>
       )
     }
 
-    <section aria-labelledby="partners">
+    <CaptainContacts locale={locale} />
+  </div>
+
+  <section class="partners-band" aria-labelledby="partners">
+    <div class="container">
       <h2 id="partners">{t.partners}</h2>
       <PartnerList />
       <p>
         <a href={partnersHref}>{t.allPartners} →</a> · <a href={`${partnersHref}#sponsoring`}>{t.becomeSponsor}</a>
       </p>
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>
 
+<script>
+  // Masque les événements passés entre deux mises à jour du site.
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  document.querySelectorAll<HTMLElement>('.event-rows [data-end]').forEach((item) => {
+    if (new Date(item.dataset.end!) < today) item.hidden = true;
+  });
+</script>
+
 <style>
+  .team-links {
+    display: flex;
+    gap: 0.5rem;
+    padding-block: 0.6rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .team-links a {
+    flex: none;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Photo plein cadre, texte sur un dégradé vert. */
   .hero {
-    padding-block: 2.5rem 2rem;
-    background: linear-gradient(160deg, var(--color-primary) 0%, #014d24 100%);
+    position: relative;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    height: clamp(24rem, 75vh, 38rem);
+    overflow: hidden;
+    background: var(--color-primary-dark);
     color: var(--color-primary-contrast);
   }
 
-  /* Sur le fond vert, le bouton principal passe en blanc. */
-  .hero .button.primary {
+  .hero img {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+
+  .hero-text {
+    grid-area: 1 / 1;
+    align-self: end;
+    padding-block: 5rem 1.5rem;
+    background: linear-gradient(transparent, rgb(1 60 28 / 0.94) 55%);
+  }
+
+  .hero h1 {
+    margin: 0;
+    color: inherit;
+    font-size: clamp(2.1rem, 7vw, 3.4rem);
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    max-width: 38rem;
+    margin: 0.4rem 0 0;
+    font-size: 1.1rem;
+    opacity: 0.92;
+  }
+
+  .hero .actions {
+    margin-block: 1rem 0;
+  }
+
+  .button.light {
     background: var(--color-bg);
     border-color: var(--color-bg);
     color: var(--color-primary);
   }
 
-  .hero h1 {
-    color: inherit;
+  .button.outline {
+    border-color: currentColor;
   }
 
-  .lead {
-    max-width: 38rem;
-    margin: 0;
-    font-size: 1.15rem;
-    opacity: 0.92;
-  }
-
-  .hero-sponsor:not(:empty) {
-    margin-top: 1.75rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgb(255 255 255 / 0.2);
+  .home-sponsor:has(.main-sponsor) {
+    margin-top: 1.5rem;
   }
 
   .container > section {
-    margin-top: 2rem;
+    margin-top: 2.25rem;
+  }
+
+  .container > section > h2 {
+    margin-bottom: 0.75rem;
+    color: var(--color-primary-dark);
+    text-transform: uppercase;
+  }
+
+  .photo-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 900px) {
+    .photo-cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  .photo-card {
+    position: relative;
+    display: grid;
+    aspect-ratio: 1 / 1.08;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--color-primary-dark);
+    color: var(--color-primary-contrast);
+    text-decoration: none;
+  }
+
+  .photo-card img {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.04);
+  }
+
+  .photo-card-text {
+    grid-area: 1 / 1;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0.8rem 0.75rem;
+    background: linear-gradient(transparent, rgb(1 60 28 / 0.92));
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .photo-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* Bandeau d'actus à faire défiler du doigt. */
+  .news-strip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(75%, 18rem);
+    gap: 0.75rem;
+    margin: 0 0 0.75rem;
+    padding: 0 0 0.25rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .news-strip li {
+    scroll-snap-align: start;
+  }
+
+  .news-strip a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .news-strip img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .news-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 0.8rem 0.8rem;
+  }
+
+  .news-text time {
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .news-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .event-rows {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .event-rows li {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 16px;
+    background: var(--color-surface);
+  }
+
+  .event-thumb {
+    position: relative;
+    display: block;
+    height: 4.25rem;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .event-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .event-date {
+    position: absolute;
+    left: 0.3rem;
+    bottom: 0.3rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .event-meta {
+    display: block;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .partners-band {
+    margin-top: 2.5rem;
+    padding-block: 1.75rem 1rem;
+    background: var(--color-surface);
+  }
+
+  .partners-band h2 {
+    margin-top: 0;
+    color: var(--color-primary-dark);
+    text-transform: uppercase;
   }
 </style>
