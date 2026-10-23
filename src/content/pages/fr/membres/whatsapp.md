@@ -1,12 +1,17 @@
 ---
 title: "WhatsApp"
-description: "La communauté WhatsApp du club : annonces, groupes d'équipe et comment y entrer."
+description: "La communauté WhatsApp de l'Ixelles Hockey Club : groupes d'annonces, groupes d'équipe et lien pour y entrer."
 order: 50
 ---
 
-La communauté WhatsApp est le canal principal des nouvelles du club. Elle donne accès :
+La communauté WhatsApp est le canal principal des nouvelles du club. Elle rassemble :
 
-- au groupe **Annonces**, où seuls les administrateurs publient ;
-- aux groupes privés de chaque équipe.
+- **Annonces** : les nouvelles générales du club ;
+- **Annonces Juniors** : uniquement l'école des jeunes ;
+- **Annonces Seniors** : uniquement les équipes seniors ;
+- les groupes privés de chaque équipe ;
+- quelques groupes thématiques fermés.
 
-> À compléter : lien d'invitation à la communauté.
+Dans les groupes d'annonces, seuls les administrateurs publient : pas de spam.
+
+[Rejoindre la communauté WhatsApp du club](https://chat.whatsapp.com/DvNqfacKeQ2KBX0g4GJEMR)
