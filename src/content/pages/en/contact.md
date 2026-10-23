@@ -32,7 +32,7 @@ Parking on Rue de Brebis is a blue zone: use a parking disc, and watch the time 
 | Youth school and youth technical direction | Vincent Launois | [vincent@ixelles.hockey](mailto:vincent@ixelles.hockey) |
 | Treasury | Emilio Gamba, treasurer | [finances@ixelles.hockey](mailto:finances@ixelles.hockey) |
 | Ethics | Ethics contact | [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey) |
-| Communication | Pacôme | [communication@ixelles.hockey](mailto:communication@ixelles.hockey) |
+| Communication | Pacôme Delelienne | [communication@ixelles.hockey](mailto:communication@ixelles.hockey) |
 | Fair play | Emilie Bordes | [fairplay@ixelles.hockey](mailto:fairplay@ixelles.hockey) |
 | Refereeing | Refereeing lead | [arbitrage@ixelles.hockey](mailto:arbitrage@ixelles.hockey) |
 | Sponsoring | Elisabeth Hens and Nathan Spilborghs | [sponsoring@ixelles.hockey](mailto:sponsoring@ixelles.hockey) |

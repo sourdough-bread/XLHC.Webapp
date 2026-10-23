@@ -32,7 +32,7 @@ Rue de Brebis, le stationnement est en zone bleue, avec disque. Attention au dé
 | École des jeunes et direction technique jeunes | Vincent Launois | [vincent@ixelles.hockey](mailto:vincent@ixelles.hockey) |
 | Trésorerie | Emilio Gamba, trésorier | [finances@ixelles.hockey](mailto:finances@ixelles.hockey) |
 | Éthique | Référent éthique | [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey) |
-| Communication | Pacôme | [communication@ixelles.hockey](mailto:communication@ixelles.hockey) |
+| Communication | Pacôme Delelienne | [communication@ixelles.hockey](mailto:communication@ixelles.hockey) |
 | Fair-play | Emilie Bordes | [fairplay@ixelles.hockey](mailto:fairplay@ixelles.hockey) |
 | Arbitrage | Responsable arbitrage | [arbitrage@ixelles.hockey](mailto:arbitrage@ixelles.hockey) |
 | Sponsoring | Elisabeth Hens et Nathan Spilborghs | [sponsoring@ixelles.hockey](mailto:sponsoring@ixelles.hockey) |
