@@ -1,0 +1,29 @@
+{
+  "name": "Ixelles Hockey Club",
+  "shortName": "Ixelles HC",
+  "address": "Rue Volta 18, 1050 Ixelles",
+  "mapUrl": "https://www.openstreetmap.org/search?query=Rue%20Volta%2018%2C%201050%20Ixelles",
+  "email": "manager@ixelles.hockey",
+  "facebook": "https://www.facebook.com/IxellesHC",
+  "instagram": "https://www.instagram.com/ixelles_hockey_club",
+  "whatsapp": "/membres/whatsapp/",
+  "twizzitJoin": "",
+  "twizzitTrial": "",
+  "pitchSheetCsvUrl": "",
+  "pitchFallbackStatus": "ok",
+  "pitchFallbackNote": "",
+  "partners": [
+    { "name": "Hockey-Player", "url": "" },
+    { "name": "Weinvest", "url": "" },
+    { "name": "BX1", "url": "" },
+    { "name": "Digitribe", "url": "" },
+    { "name": "Victor Avocats", "url": "" }
+  ],
+  "funders": [
+    { "name": "ADEPS" },
+    { "name": "COCOF" },
+    { "name": "Région de Bruxelles-Capitale" },
+    { "name": "Centre Sportif Ixellois" },
+    { "name": "Commune d’Ixelles" }
+  ]
+}
