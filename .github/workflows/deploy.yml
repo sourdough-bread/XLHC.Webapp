@@ -1,0 +1,79 @@
+name: Deploy
+
+# À chaque enregistrement sur main (Pages CMS ou GitHub) :
+# - l'aperçu GitHub Pages est toujours mis à jour ;
+# - l'aperçu OVH (nouveau.ixelles.hockey) est mis à jour si la variable OVH_PREVIEW_DIR existe ;
+# - le site public sur OVH est mis à jour si la variable OVH_PRODUCTION_DIR existe (à créer le jour de la bascule).
+# Les envois vers OVH utilisent les secrets OVH_FTP_SERVER, OVH_FTP_USER et OVH_FTP_PASSWORD.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          SITE_TARGET: github-pages
+          BASE_PATH: /${{ github.event.repository.name }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  ovh:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: preview
+            dir: ${{ vars.OVH_PREVIEW_DIR }}
+          - target: production
+            dir: ${{ vars.OVH_PRODUCTION_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+        if: matrix.dir != ''
+      - uses: actions/setup-node@v4
+        if: matrix.dir != ''
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+        if: matrix.dir != ''
+      - run: npm run build
+        if: matrix.dir != ''
+        env:
+          SITE_TARGET: ${{ matrix.target }}
+      # N'envoie que les fichiers modifiés depuis le dernier envoi.
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        if: matrix.dir != ''
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          username: ${{ secrets.OVH_FTP_USER }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          protocol: ${{ vars.OVH_FTP_PROTOCOL || 'ftps' }}
+          local-dir: dist/
+          server-dir: ${{ matrix.dir }}

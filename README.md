@@ -1,6 +1,6 @@
 # XLHC.Webapp
 
-Le site web de l'Ixelles Hockey Club, pensé d'abord pour le téléphone. Il est construit avec [Astro](https://astro.build) et produit un site statique qui peut être hébergé gratuitement (Netlify, Vercel, Cloudflare Pages…).
+Le site web de l'Ixelles Hockey Club, pensé d'abord pour le téléphone. Il est construit avec [Astro](https://astro.build) et produit un site statique hébergé chez OVH, avec un aperçu gratuit sur GitHub Pages.
 
 ## Modifier le contenu
 
@@ -98,6 +98,28 @@ npm run dev      # serveur local sur http://localhost:4321
 npm run build    # génère le site dans dist/
 npm run preview  # prévisualise le site généré
 ```
+
+### Mise en ligne
+
+Chaque enregistrement sur `main` lance le workflow `.github/workflows/deploy.yml` :
+
+| Cible | Adresse | Quand |
+| --- | --- | --- |
+| Aperçu GitHub Pages | https://sourdough-bread.github.io/XLHC.Webapp/ | toujours |
+| Aperçu OVH | nouveau.ixelles.hockey | si la variable `OVH_PREVIEW_DIR` existe |
+| Site public OVH | www.ixelles.hockey | si la variable `OVH_PRODUCTION_DIR` existe |
+
+Les deux aperçus sont cachés de Google. `npm run build` génère aussi le `.htaccess` d'OVH (redirections 301 des anciennes adresses, HTTPS, www) à partir de `src/data/redirects.mjs`.
+
+Mise en place, une seule fois :
+
+1. GitHub, **Settings → Pages → Source : GitHub Actions**.
+2. Dans l'espace client OVH, **Web Cloud → Hébergements → FTP-SSH** : notez le serveur FTP et l'identifiant (changez le mot de passe si besoin).
+3. GitHub, **Settings → Secrets and variables → Actions** :
+   - secrets `OVH_FTP_SERVER`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD` ;
+   - variable `OVH_PREVIEW_DIR`, le dossier de nouveau.ixelles.hockey sur l'hébergement, par exemple `nouveau/` (créez le sous-domaine dans OVH, **Multisite**, avec ce dossier) ;
+   - variable facultative `OVH_FTP_PROTOCOL` : `ftps` par défaut, `ftp` si OVH refuse la connexion chiffrée.
+4. Le jour de la bascule : variable `OVH_PRODUCTION_DIR` (par exemple `www/`), puis faire pointer `www` et `ixelles.hockey` vers l'hébergement OVH, sans toucher aux enregistrements MX (e-mail).
 
 ### Structure
 
