@@ -5,6 +5,7 @@ import NewsList from '../components/NewsList.astro';
 import EventList from '../components/EventList.astro';
 import TeamList from '../components/TeamList.astro';
 import PartnerList from '../components/PartnerList.astro';
+import PitchMap from '../components/PitchMap.astro';
 import { getNavigation, getTranslation, pageHref, pageLocale } from '../data/navigation';
 import { getNews, getTeams, getUpcomingCamps, getUpcomingEvents, resolveHref } from '../data/content';
 
@@ -60,6 +61,7 @@ const listing = page.data.listing;
         </p>
       )
     }
+    {page.data.translationKey === 'contact' && <PitchMap locale={locale} />}
     <div class="prose">
       <Content />
     </div>

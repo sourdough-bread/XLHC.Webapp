@@ -4,6 +4,7 @@ import PartnerList from './PartnerList.astro';
 import MainSponsor from './MainSponsor.astro';
 import Scoreboard from './Scoreboard.astro';
 import CaptainContacts from './CaptainContacts.astro';
+import PitchMap from './PitchMap.astro';
 import { partnersHref } from '../data/site';
 import { getNews, getUpcomingEvents } from '../data/content';
 import { dateFormat, homeHref, ui, type Locale } from '../i18n/ui';
@@ -175,6 +176,8 @@ const copy = {
         </section>
       )
     }
+
+    <PitchMap locale={locale} compact />
 
     <CaptainContacts locale={locale} />
   </div>
