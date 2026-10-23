@@ -35,7 +35,7 @@ content:
         type: text
         required: true
       - name: image
-        label: Photo
+        label: Photo (enfants reconnaissables uniquement si les parents ont donné leur accord dans Twizzit ; préférez les photos de groupe ou d'action)
         type: image
       - name: imageAlt
         label: Description de la photo (pour les malvoyants, obligatoire s'il y a une photo)
@@ -243,7 +243,7 @@ content:
             - name: partners
               label: Partenaires
       - name: image
-        label: Image de partage
+        label: Image de partage (enfants reconnaissables uniquement si les parents ont donné leur accord dans Twizzit)
         type: image
       - name: imageAlt
         label: Description de l'image (obligatoire s'il y a une image)
@@ -316,7 +316,7 @@ content:
             - name: partners
               label: Partenaires
       - name: image
-        label: Image de partage
+        label: Image de partage (enfants reconnaissables uniquement si les parents ont donné leur accord dans Twizzit)
         type: image
       - name: imageAlt
         label: Description de l'image (obligatoire s'il y a une image)

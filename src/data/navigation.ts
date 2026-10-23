@@ -18,7 +18,8 @@ export const pageLocale = (page: CollectionEntry<'pages'>) => page.id.split('/')
 // Construit le menu d'une langue à partir des sections et des pages Markdown.
 export async function getNavigation(locale: Locale): Promise<NavSection[]> {
   const pages = await getCollection('pages', (p) => !p.data.hidden && p.id.startsWith(locale + '/'));
-  return sections[locale].map(({ slug, label }) => {
+  return sections[locale].map(({ slug, label, href }) => {
+    if (href) return { label, href, children: [] };
     const base = `${locale}/${slug}/`;
     const children = pages
       .filter((p) => p.id.startsWith(base) && p.id !== base + 'index')

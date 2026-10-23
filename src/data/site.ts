@@ -43,7 +43,9 @@ export const pitchLabels: Record<Locale, Record<PitchStatus, string>> = {
 
 // Menu principal par langue. Chaque section correspond à un dossier dans
 // src/content/pages/<langue>/. Les sous-pages sont ajoutées automatiquement.
-export const sections: Record<Locale, { slug: string; label: string }[]> = {
+// Une entrée avec href pointe vers une page existante sans dossier (les actus et
+// événements n'existent qu'en français, signalés par « (FR) » dans le menu anglais).
+export const sections: Record<Locale, { slug: string; label: string; href?: string }[]> = {
   fr: [
     { slug: 'rejoindre', label: 'Rejoindre' },
     { slug: 'equipes', label: 'Équipes' },
@@ -54,6 +56,8 @@ export const sections: Record<Locale, { slug: string; label: string }[]> = {
   en: [
     { slug: 'join', label: 'Join us' },
     { slug: 'teams', label: 'Teams' },
+    { slug: 'news', label: 'News (FR)', href: '/club/actus/' },
+    { slug: 'events', label: 'Events (FR)', href: '/club/evenements/' },
     { slug: 'contact', label: 'Contact' },
   ],
 };
