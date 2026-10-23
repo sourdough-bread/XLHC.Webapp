@@ -1,0 +1,112 @@
+---
+import { pitch, pitchLabels } from '../data/site';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui[locale];
+const labels = pitchLabels[locale];
+const { status, note } = pitch.fallback;
+---
+
+<a
+  class="pitch-banner"
+  href="/membres/terrain/"
+  data-status={status}
+  data-sheet={pitch.sheetCsvUrl || undefined}
+  data-labels={JSON.stringify(labels)}
+  data-locale={locale}
+>
+  <span class="container inner">
+    <span class="dot" aria-hidden="true"></span>
+    <span>
+      <strong>{t.pitch}</strong>{' '}<span class="label">{labels[status]}</span>
+      <span class="note">{note && ` · ${note}`}</span>
+      <span class="updated" data-prefix={t.pitchUpdated}></span>
+    </span>
+  </span>
+</a>
+
+<script>
+  // Lit l'état du terrain en direct depuis une feuille Google publiée en CSV
+  // (colonnes : horodatage, état, remarque ; la dernière ligne fait foi).
+  const banner = document.querySelector<HTMLElement>('.pitch-banner');
+  const url = banner?.dataset.sheet;
+
+  const toStatus = (value: string) => {
+    const v = value.toLowerCase();
+    if (/impraticable|ferm|closed|rouge|red/.test(v)) return 'closed';
+    if (/incertain|doute|uncertain|orange/.test(v)) return 'warning';
+    return 'ok';
+  };
+
+  const parseRow = (line: string) =>
+    (line.match(/("([^"]|"")*"|[^,]*)(,|$)/g) ?? []).map((cell) =>
+      cell.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"').trim(),
+    );
+
+  if (banner && url) {
+    fetch(url, { credentials: 'omit' })
+      .then((response) => (response.ok ? response.text() : Promise.reject()))
+      .then((csv) => {
+        const rows = csv.trim().split(/\r?\n/).slice(1).filter(Boolean);
+        const [timestamp = '', state = '', note = ''] = parseRow(rows.at(-1) ?? '');
+        if (!state) return;
+        const status = toStatus(state);
+        const labels = JSON.parse(banner.dataset.labels ?? '{}');
+        banner.dataset.status = status;
+        banner.querySelector('.label')!.textContent = labels[status];
+        banner.querySelector('.note')!.textContent = note ? ` · ${note}` : '';
+        const updated = banner.querySelector<HTMLElement>('.updated')!;
+        if (timestamp) updated.textContent = ` (${updated.dataset.prefix} ${timestamp})`;
+      })
+      .catch(() => {
+        // En cas d'erreur, on garde la valeur par défaut.
+      });
+  }
+</script>
+
+<style>
+  .pitch-banner {
+    display: block;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-block: 0.5rem;
+  }
+
+  .dot {
+    flex: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--color-ok);
+    box-shadow: 0 0 0 3px rgb(31 138 76 / 0.2);
+  }
+
+  [data-status='warning'] .dot {
+    background: var(--color-warning);
+    box-shadow: 0 0 0 3px rgb(194 124 14 / 0.2);
+  }
+
+  [data-status='closed'] .dot {
+    background: var(--color-closed);
+    box-shadow: 0 0 0 3px rgb(192 57 43 / 0.2);
+  }
+
+  .note,
+  .updated {
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  items: CollectionEntry<'teams'>[];
+  locale: Locale;
+}
+
+const { items, locale } = Astro.props;
+const t = ui[locale];
+---
+
+{
+  items.length === 0 ? (
+    <p>{t.noItems}</p>
+  ) : (
+    <ul class="card-grid">
+      {items.map(({ data }) => (
+        <li class="card team">
+          {data.recruiting && <span class="badge">{t.recruiting}</span>}
+          <h3>{data.name}</h3>
+          <p>{data.level}</p>
+          {data.training && (
+            <p>
+              <strong>{t.training}</strong> {data.training}
+            </p>
+          )}
+          <p class="links">
+            {data.hockeyBelgiumUrl && <a href={data.hockeyBelgiumUrl}>{t.results}</a>}
+            {data.email && <a href={`mailto:${data.email}`}>{data.email}</a>}
+          </p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .team {
+    position: relative;
+  }
+
+  .team p {
+    margin-top: 0.25rem;
+  }
+
+  .badge {
+    float: right;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+
+  .links a {
+    color: var(--color-primary);
+  }
+</style>

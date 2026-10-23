@@ -1,0 +1,69 @@
+---
+import Header from '../components/Header.astro';
+import PitchBanner from '../components/PitchBanner.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { homeHref, ui, type Locale } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  locale?: Locale;
+  title?: string;
+  description?: string;
+  image?: string;
+  // Adresse de la même page dans l'autre langue (sinon, l'accueil de l'autre langue).
+  translationHref?: string;
+}
+
+const { locale = 'fr', title, description = ui[locale].tagline, image } = Astro.props;
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
+const translationHref = Astro.props.translationHref ?? homeHref(otherLocale);
+const fullTitle = title ? `${title} · ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image && new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b2a5b" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    {
+      Astro.props.translationHref && (
+        <link rel="alternate" hreflang={otherLocale} href={new URL(Astro.props.translationHref, Astro.site)} />
+      )
+    }
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'fr' ? 'fr_BE' : 'en_GB'} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">{ui[locale].skip}</a>
+    <Header locale={locale} translationHref={translationHref} />
+    <PitchBanner locale={locale} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>
+
+<style is:global>
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  @media (min-width: 960px) {
+    body.no-scroll {
+      overflow: auto;
+    }
+  }
+</style>

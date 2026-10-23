@@ -1,0 +1,46 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getNews } from '../../../data/content';
+import { dateFormat } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const news = await getNews();
+  return news.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<BaseLayout title={item.data.title} description={item.data.description} image={item.data.image}>
+  <article class="container page">
+    <p class="breadcrumb"><a href="/club/actus/">Actus</a></p>
+    <h1>{item.data.title}</h1>
+    <p class="meta">
+      <time datetime={item.data.date.toISOString()}>{dateFormat('fr', item.data.date)}</time>
+    </p>
+    {
+      item.data.image && (
+        <img class="cover" src={item.data.image} alt={item.data.imageAlt ?? ''} />
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .meta {
+    margin-top: -0.5rem;
+    color: var(--color-muted);
+  }
+
+  .cover {
+    display: block;
+    max-width: 44rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+  }
+</style>

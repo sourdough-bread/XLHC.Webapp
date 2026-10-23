@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsList from '../components/NewsList.astro';
+import EventList from '../components/EventList.astro';
+import TeamList from '../components/TeamList.astro';
+import PartnerList from '../components/PartnerList.astro';
+import { getNavigation, getTranslation, pageHref, pageLocale } from '../data/navigation';
+import { getNews, getTeams, getUpcomingCamps, getUpcomingEvents, resolveHref } from '../data/content';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: pageHref(page.id).slice(1, -1) },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const locale = pageLocale(page);
+const otherLocale = locale === 'fr' ? 'en' : 'fr';
+
+const href = pageHref(page.id);
+const nav = await getNavigation(locale);
+const section = nav.find((s) => href.startsWith(s.href));
+const isSectionIndex = section?.href === href;
+const translationHref = await getTranslation(page.data.translationKey, otherLocale);
+const actions = page.data.actions
+  .map((a) => ({ ...a, href: resolveHref(a.href) }))
+  .filter((a) => a.href);
+
+const listing = page.data.listing;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.data.title}
+  description={page.data.description}
+  image={page.data.image}
+  translationHref={translationHref}
+>
+  <div class="container page">
+    {
+      section && !isSectionIndex && (
+        <p class="breadcrumb">
+          <a href={section.href}>{section.label}</a>
+        </p>
+      )
+    }
+    <h1>{page.data.title}</h1>
+    {
+      actions.length > 0 && (
+        <p class="actions">
+          {actions.map((a, i) => (
+            <a class:list={['button', { primary: i === 0 }]} href={a.href}>
+              {a.label}
+            </a>
+          ))}
+        </p>
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+
+    {listing === 'news' && <NewsList items={await getNews()} locale={locale} />}
+    {listing === 'events' && <EventList items={await getUpcomingEvents()} locale={locale} />}
+    {listing === 'camps' && <EventList items={await getUpcomingCamps()} locale={locale} />}
+    {listing === 'juniors' && <TeamList items={await getTeams('juniors')} locale={locale} />}
+    {listing === 'seniors' && <TeamList items={await getTeams('seniors')} locale={locale} />}
+    {listing === 'partners' && <PartnerList />}
+
+    {
+      isSectionIndex && section.children.length > 0 && (
+        <ul class="card-grid">
+          {section.children.map((child) => (
+            <li>
+              <a class="card" href={child.href}>
+                <h2>{child.label}</h2>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,7 @@
+# Exemple : remplacez ou supprimez ce fichier.
+name: "U8 (exemple)"
+category: juniors
+level: "Moins de 8 ans"
+training: "Mercredi 14h-15h"
+recruiting: true
+order: 10
