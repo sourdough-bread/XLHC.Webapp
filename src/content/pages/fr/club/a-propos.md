@@ -50,7 +50,7 @@ La charte éthique et inclusive du club. L'esprit sportif, le respect et le fair
 - Tout le monde est concerné : joueur·ses, staff, supporteurs·trices.
 - Solidarité, bienveillance, inclusion.
 
-N'hésitez pas à contacter l'Organe d'administration, [oa.xl@ixelle.be](mailto:oa.xl@ixelle.be), si un événement vous paraît ne pas correspondre à la charte éthique et inclusive du XLHC.
+N'hésitez pas à contacter l'Organe d'administration, [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey), si un événement vous paraît ne pas correspondre à la charte éthique et inclusive du XLHC.
 
 ## Règlement d'ordre intérieur {#roi}
 
