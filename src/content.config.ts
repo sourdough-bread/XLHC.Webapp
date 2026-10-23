@@ -68,6 +68,24 @@ const events = defineCollection({
     summary: blank(z.string().optional()),
     // Lien d'inscription Twizzit.
     signupUrl: blank(z.string().url().optional()),
+    // Photo affichée en vignette sur l'accueil (chemin dans public/media).
+    image: blank(z.string().optional()),
+  }),
+});
+
+// Matchs des équipes premières : src/content/matches/<date>-<équipe>.yml
+// Sans score, c'est un match à venir ; avec score, un résultat.
+const matches = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/matches' }),
+  schema: z.object({
+    team: z.string(),
+    opponent: z.string(),
+    date: z.coerce.date(),
+    // Heure du coup d'envoi, par exemple 15:00.
+    time: blank(z.string().optional()),
+    home: blank(z.boolean().default(true)),
+    scoreFor: blank(z.number().int().min(0).optional()),
+    scoreAgainst: blank(z.number().int().min(0).optional()),
   }),
 });
 
@@ -103,4 +121,4 @@ const teams = defineCollection({
   }),
 });
 
-export const collections = { pages, news, events, camps, teams };
+export const collections = { pages, news, events, camps, teams, matches };

@@ -1,0 +1,88 @@
+---
+import { getScoreboard } from '../data/content';
+import { dateFormat, ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+// Bandeau vert sous la photo d'accueil : dernier résultat et prochain match de chaque équipe.
+// N'affiche rien tant qu'aucun match n'est encodé dans src/content/matches.
+const { locale } = Astro.props;
+const t = ui[locale];
+const club = 'Ixelles';
+
+const rows = (await getScoreboard()).map(({ data }) => {
+  const played = data.scoreFor !== undefined && data.scoreAgainst !== undefined;
+  const [left, right] = data.home ? [club, data.opponent] : [data.opponent, club];
+  const [leftScore, rightScore] = data.home ? [data.scoreFor, data.scoreAgainst] : [data.scoreAgainst, data.scoreFor];
+  const day = dateFormat(locale, data.date, { weekday: 'short', day: 'numeric', month: 'numeric', year: undefined });
+  return {
+    label: `${played ? t.lastResult : t.nextMatch} · ${data.team}`,
+    main: played ? `${left} ${leftScore} – ${rightScore} ${right}` : `${left} – ${right}`,
+    when: played ? day : [day, data.time, data.home ? t.home_ground : t.away].filter(Boolean).join(' · '),
+  };
+});
+---
+
+{
+  rows.length > 0 && (
+    <section class="scoreboard" aria-label={t.scoreboard}>
+      <ul class="container">
+        {rows.map((row) => (
+          <li>
+            <span class="label">{row.label}</span>
+            <span class="main">{row.main}</span>
+            <span class="when">{row.when}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .scoreboard {
+    background: var(--color-primary);
+  }
+
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(80%, 17rem);
+    gap: 0.6rem;
+    margin: 0 auto;
+    padding-block: 0.8rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: 0.55rem 0.85rem;
+    border-radius: 16px;
+    background: var(--color-bg);
+  }
+
+  .label {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .main {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .when {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+  }
+</style>
