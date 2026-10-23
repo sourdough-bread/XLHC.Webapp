@@ -1,6 +1,6 @@
 ---
 title: "Contact et accès"
-description: "Adresse du terrain, plan, transports en commun, parking et adresses e-mail du club."
+description: "Adresse du terrain de l'Ixelles Hockey Club, plan, accès par le centre sportif ou par la rue de Brebis, parking et contact."
 translationKey: contact
 ---
 
@@ -13,10 +13,19 @@ Rue Volta 18, 1050 Ixelles
 
 ## Venir au terrain
 
-> À compléter : arrêts de tram et de bus, parking, emplacements vélos.
+On peut entrer par deux côtés :
+
+- **par le haut**, via le centre sportif : rue Volta 18, 1050 Ixelles ;
+- **par le bas**, via la pétanque : rue de Brebis 77, 1050 Ixelles.
+
+Rue de Brebis, le stationnement est en zone bleue, avec disque. Attention au dépassement de durée et aux redevances de stationnement le samedi.
+
+> À compléter : arrêts de tram et de bus, emplacements vélos.
 
 ## Nous écrire
 
 Club : [manager@ixelles.hockey](mailto:manager@ixelles.hockey)
+
+Compte bancaire : BE33 1430 8707 1446 (Fintro)
 
 > À compléter : adresses de rôle (juniors@, seniors@, partenaires@).

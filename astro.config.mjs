@@ -30,7 +30,7 @@ const redirects = {
   '/admin/demande-daffiliation': '/rejoindre/inscription/',
   '/admin/désaffiliation': '/membres/formalites/#desaffiliation',
   '/admin/etalement-de-cotisation': '/rejoindre/cotisations/#etalement',
-  '/admin/remisereport': '/rejoindre/cotisations/#reductions',
+  '/admin/remisereport': '/membres/sport/#report',
   '/admin/attestations-mutuelles': '/membres/formalites/#mutuelle',
   '/admin/déclaration-daccident': '/membres/formalites/#accident',
   '/admin/app-hockey-belgium': '/membres/formalites/#app-hockey-belgium',

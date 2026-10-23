@@ -13,11 +13,12 @@
   "pitchFallbackStatus": "ok",
   "pitchFallbackNote": "",
   "partners": [
-    { "name": "Hockey-Player", "url": "" },
-    { "name": "Weinvest", "url": "" },
-    { "name": "BX1", "url": "" },
-    { "name": "Digitribe", "url": "" },
-    { "name": "Victor Avocats", "url": "" }
+    { "name": "Hockey-Player", "url": "https://hockeyplayer.shop/" },
+    { "name": "Weinvest", "url": "https://weinvest.be/fr-BE" },
+    { "name": "BX1", "url": "https://bx1.be/" },
+    { "name": "Digitribe", "url": "https://www.digitribe.be/" },
+    { "name": "Victor Avocats", "url": "http://www.victor.law/" },
+    { "name": "G5V", "url": "" }
   ],
   "funders": [
     { "name": "ADEPS" },
