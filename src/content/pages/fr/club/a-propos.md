@@ -21,20 +21,20 @@ Concrètement, le club veut :
 
 ### Responsables opérationnels
 
-- **Manager** : Benoit Dormal, [manager@ixelles.hockey](mailto:manager@ixelles.hockey)
+- **Manager** : Jehenne Klaï, [manager@ixelles.hockey](mailto:manager@ixelles.hockey)
 - **Directeur de l'école des jeunes** : Vincent Launois
 
 ### Organe d'administration
 
 - **Président** : Philippe Vernet, [president@ixelles.hockey](mailto:president@ixelles.hockey)
-- **Administrateurs jeunes** : Alex Van Dongen, Emilie Bordes
-- **Administrateurs adultes** : Marie Carlier, Nathalie Decoen, Nathan Spilborghs
-- **Trésorier** : Antonin Halut, [finances@ixelles.hockey](mailto:finances@ixelles.hockey)
+- **Administrateurs jeunes** : Emilie Bordes
+- **Administrateurs adultes** : Marie Carlier, Elisabeth Hens, Nathan Spilborghs
+- **Trésorier** : Emilio Gamba, [finances@ixelles.hockey](mailto:finances@ixelles.hockey)
 
 ### Comités
 
-- **Arbitrage** : Benoit Dormal (CUC)
-- **École des jeunes** : Emilie Bordes
+- **Arbitrage** : Nathan Spilborghs (CUC)
+- **École des jeunes** : Vincent Launois
 - **Événements** : on cherche du monde, voir [Bénévolat](/membres/benevolat/).
 
 ## Charte éthique {#charte}
