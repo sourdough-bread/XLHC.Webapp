@@ -1,30 +1,54 @@
 ---
-import { partners } from '../data/site';
+import SponsorLogo from './SponsorLogo.astro';
+import { mainSponsors, otherPartners } from '../data/site';
 ---
 
+{
+  mainSponsors.length > 0 && (
+    <ul class="logos main">
+      {mainSponsors.map((p) => (
+        <li>
+          <SponsorLogo partner={p} />
+        </li>
+      ))}
+    </ul>
+  )
+}
 <ul class="logos">
-  {partners.map((p) => <li>{p.url ? <a href={p.url}>{p.name}</a> : p.name}</li>)}
+  {
+    otherPartners.map((p) => (
+      <li>
+        <SponsorLogo partner={p} />
+      </li>
+    ))
+  }
 </ul>
 
 <style>
   .logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 0.75rem;
     padding: 0;
     list-style: none;
   }
 
   .logos li {
-    padding: 0.5rem 0.9rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    color: var(--color-muted);
-    font-weight: 600;
+    height: 6rem;
   }
 
-  .logos a {
-    color: inherit;
-    text-decoration: none;
+  .logos.main {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+
+  .logos.main li {
+    height: 9rem;
+  }
+
+  @media (min-width: 640px) {
+    .logos {
+      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    }
   }
 </style>

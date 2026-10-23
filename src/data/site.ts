@@ -6,6 +6,8 @@ import settings from './settings.json';
 export const site = {
   name: settings.name,
   shortName: settings.shortName,
+  // Logo chargé dans Pages CMS ; sinon l'en-tête affiche le monogramme « XL ».
+  logo: settings.logo,
   address: settings.address,
   // Lien « ouvrir dans Maps » (pas de carte intégrée, donc pas de cookies).
   mapUrl: settings.mapUrl,
@@ -62,7 +64,13 @@ export const sections: Record<Locale, { slug: string; label: string; href?: stri
   ],
 };
 
-export const partners = settings.partners;
+export type Partner = { name: string; url: string; tier?: string; logo?: string };
+
+export const partners: Partner[] = settings.partners;
+// Le ou les sponsors principaux sont mis en avant sur l'accueil et dans le pied de page.
+export const mainSponsors = partners.filter((p) => p.tier === 'main');
+export const otherPartners = partners.filter((p) => p.tier !== 'main');
+export const partnersHref = '/club/partenaires/';
 
 // Pouvoirs publics, affichés dans le pied de page (souvent exigé par les subsides).
 export const funders = settings.funders;

@@ -1,0 +1,59 @@
+---
+import SponsorLogo from './SponsorLogo.astro';
+import { mainSponsors } from '../data/site';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+// Bandeau du ou des sponsors principaux. N'affiche rien si aucun partenaire n'est « principal ».
+const { locale } = Astro.props;
+const t = ui[locale];
+---
+
+{
+  mainSponsors.length > 0 && (
+    <div class="main-sponsor">
+      <p class="label">{t.mainSponsor}</p>
+      <ul>
+        {mainSponsors.map((p) => (
+          <li>
+            <SponsorLogo partner={p} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<style>
+  .main-sponsor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .label {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    width: 12rem;
+    height: 5rem;
+  }
+</style>

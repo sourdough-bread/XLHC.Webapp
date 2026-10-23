@@ -341,6 +341,9 @@ content:
         label: Nom court (en-tête)
         type: string
         required: true
+      - name: logo
+        label: Logo du club (en-tête et icône de l'onglet, PNG transparent ou SVG)
+        type: image
       - name: address
         label: Adresse
         type: string
@@ -396,6 +399,19 @@ content:
           - name: url
             label: Site web
             type: string
+          - name: tier
+            label: Visibilité
+            type: select
+            default: partner
+            options:
+              values:
+                - name: main
+                  label: Sponsor principal (accueil et pied de page de toutes les pages)
+                - name: partner
+                  label: Partenaire (grille de logos)
+          - name: logo
+            label: Logo (de préférence PNG transparent ou SVG)
+            type: image
       - name: funders
         label: Pouvoirs publics (pied de page)
         type: object
