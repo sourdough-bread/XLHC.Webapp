@@ -16,4 +16,4 @@ Chaque semaine, il faut plus d'arbitres. Si l'envie est là mais que vous hésit
 
 ## Convention de bénévolat
 
-Téléchargez la [convention de bénévolat](https://drive.google.com/file/d/1dIyUGObx8RiLGfflwxcR8-wcQcZt_XNY/view), imprimez-la et signez-la en deux exemplaires : un pour vous, un pour le club. Si vous avez moins de 18 ans, vos parents la signent aussi.
+Téléchargez la [convention de bénévolat](/media/convention-benevolat.pdf), imprimez-la et signez-la en deux exemplaires : un pour vous, un pour le club. Si vous avez moins de 18 ans, vos parents la signent aussi.

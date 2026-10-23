@@ -6,7 +6,63 @@ order: 20
 
 ## Entraînements {#entrainements}
 
-> À compléter : l'ancienne page « Entrainements » affichait l'horaire sous forme d'image ; en reprendre le tableau ici.
+Saison 2026-2027. Chaque ligne indique les équipes qui s'entraînent en même temps sur le terrain.
+
+**Légende.** U = moins de (U9 : moins de 9 ans), B = garçons, G = filles, D = dames, H = hommes. « Clinics » : séances de perfectionnement.
+
+### Lundi
+
+| Heure | Équipes |
+| --- | --- |
+| 17h30 – 19h00 | U16B · U19G |
+| 19h00 – 20h30 | D5 · U19B |
+| 20h30 – 22h00 | Ladies · Gents |
+
+### Mardi
+
+| Heure | Équipes |
+| --- | --- |
+| 16h30 – 17h30 | U9B U10B |
+| 17h30 – 19h00 | U14B · U11B U12B |
+| 19h00 – 20h30 | D1 · D4 |
+| 20h30 – 22h00 | H1 · H2 |
+| 22h00 – 22h30 | H1 (terrain entier) |
+
+### Mercredi
+
+| Heure | Équipes |
+| --- | --- |
+| 13h30 – 14h30 | U6 B/G · U7 B/G |
+| 14h30 – 15h30 | U8 B/G · U9 B/G |
+| 15h30 – 16h30 | U10 B/G · U11 B/G |
+| 16h30 – 17h30 | U12 B/G · U14G |
+| 17h30 – 18h30 | U14B · U16G |
+| 18h30 – 19h00 | U16B · Clinics |
+| 19h00 – 19h30 | U16B · D3 |
+| 19h30 – 20h30 | Masters · D3 |
+| 20h30 – 22h00 | H3 · H4 |
+
+### Jeudi
+
+| Heure | Équipes |
+| --- | --- |
+| 17h30 – 19h00 | U19B · U19G |
+| 19h00 – 20h30 | D1 · H5 |
+| 20h30 – 22h00 | H1 · H6 |
+| 22h00 – 22h30 | H1 (terrain entier) |
+
+### Vendredi
+
+| Heure | Équipes |
+| --- | --- |
+| 16h30 – 17h30 | U9G U10G |
+| 17h30 – 19h00 | U14G · U11G U12G |
+| 19h00 – 20h30 | Clinics · U16G |
+| 20h30 – 22h00 | D2 · D6 |
+
+**Rappel :** une équipe adulte inscrite avec un créneau d'entraînement = 18 cotisations à charge de l'équipe.
+
+**Précision :** l'organisation des séances de physique et de gardiens fait l'objet d'une réévaluation quant au format, à l'animation et à la durée. Ces créneaux seront en principe accolés aux périodes prévues pour les entraînements techniques. Les informations suivront ici à la rentrée.
 
 ## Rôles {#roles}
 
@@ -31,7 +87,7 @@ Un sport sans arbitres n'existe pas, et chaque semaine il y a plus de matchs à 
 L'examen se passe en ligne, depuis chez vous : un questionnaire à choix multiple de 30 questions, tirées des exercices du cours. Il faut 80 % de bonnes réponses, et vous avez deux tentatives par examen (outdoor et indoor).
 
 1. Lisez les règles de la fédération : [outdoor](https://hockey.be/fr/competitions/outdoor-hockey/regles-du-jeu/) et [indoor](https://hockey.be/fr/competitions/indoor-hockey/regles-du-jeu/).
-2. Lisez notre [résumé des règles indoor les plus importantes](https://docs.google.com/document/d/1oGwd2qi-sFVxvA6WNdPbBd9neTFuylilgK_SB8yOXLA/edit?usp=sharing).
+2. Lisez notre [résumé des règles indoor les plus importantes](/media/resume-regles-indoor.pdf).
 3. Créez votre compte Drillster avec [ce lien réservé aux membres du club](https://www.drillster.com/user/groups/join/VIMQFjtC5gE1FKGNUPXrWq) : tout en bas de la page, choisissez « Pas encore de compte Drillster ? Créer un compte ». Si besoin, demandez une invitation à [manager@ixelles.hockey](mailto:manager@ixelles.hockey).
 4. Entraînez-vous : dans « Abonnement », ouvrez « IXELLES - Formation théorique d'arbitrage » et faites les cinq exercices (les participants au jeu, la gestuelle, les situations de jeu, les sanctions, les règles du jeu) autant de fois que vous voulez. Vous pouvez vous arrêter et reprendre quand vous voulez.
 5. Passez l'examen : dans « Tests », choisissez l'examen outdoor ou indoor. Pas besoin de passer les deux le même jour.

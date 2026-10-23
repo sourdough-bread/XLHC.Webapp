@@ -1,7 +1,7 @@
 {
   "name": "Ixelles Hockey Club",
   "shortName": "Ixelles HC",
-  "logo": "",
+  "logo": "/media/logo.png",
   "address": "Rue Volta 18, 1050 Ixelles",
   "mapUrl": "https://www.openstreetmap.org/search?query=Rue%20Volta%2018%2C%201050%20Ixelles",
   "email": "manager@ixelles.hockey",
@@ -14,18 +14,18 @@
   "pitchFallbackStatus": "ok",
   "pitchFallbackNote": "",
   "partners": [
-    { "name": "Hockey-Player", "url": "https://hockeyplayer.shop/", "tier": "partner", "logo": "" },
-    { "name": "Weinvest", "url": "https://weinvest.be/fr-BE", "tier": "partner", "logo": "" },
-    { "name": "BX1", "url": "https://bx1.be/", "tier": "partner", "logo": "" },
-    { "name": "Digitribe", "url": "https://www.digitribe.be/", "tier": "partner", "logo": "" },
-    { "name": "Victor Avocats", "url": "http://www.victor.law/", "tier": "partner", "logo": "" },
-    { "name": "G5V", "url": "", "tier": "partner", "logo": "" }
+    { "name": "Hockey-Player", "url": "https://hockeyplayer.shop/", "tier": "partner", "logo": "/media/sponsor-hockey-player.png" },
+    { "name": "Weinvest", "url": "https://weinvest.be/fr-BE", "tier": "partner", "logo": "/media/sponsor-weinvest.png" },
+    { "name": "BX1", "url": "https://bx1.be/", "tier": "partner", "logo": "/media/sponsor-bx1.png" },
+    { "name": "Digitribe", "url": "https://www.digitribe.be/", "tier": "partner", "logo": "/media/sponsor-digitribe.png" },
+    { "name": "Victor Avocats", "url": "http://www.victor.law/", "tier": "partner", "logo": "/media/sponsor-victor-avocats.png" },
+    { "name": "G5V", "url": "", "tier": "partner", "logo": "/media/sponsor-g5v.png" }
   ],
   "funders": [
-    { "name": "ADEPS" },
-    { "name": "COCOF" },
-    { "name": "Région de Bruxelles-Capitale" },
-    { "name": "Centre Sportif Ixellois" },
-    { "name": "Commune d’Ixelles" }
+    { "name": "ADEPS", "logo": "/media/funder-adeps.png" },
+    { "name": "COCOF", "logo": "/media/funder-francophones-bruxelles.png" },
+    { "name": "Région de Bruxelles-Capitale", "logo": "/media/funder-be-brussels.png" },
+    { "name": "Centre Sportif Ixellois", "logo": "/media/funder-centre-sportif-ixellois.png" },
+    { "name": "Commune d’Ixelles", "logo": "" }
   ]
 }

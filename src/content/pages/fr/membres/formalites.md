@@ -6,7 +6,7 @@ order: 30
 
 ## Conditions générales {#conditions-generales}
 
-Toute affiliation implique l'acceptation des conditions générales de la saison : [lire les conditions générales 2026-2027 (PDF)](https://drive.google.com/file/d/1NSQ5UTHZZEv5SMGxBBoibHrpnVTTvrqP/view).
+Toute affiliation implique l'acceptation des conditions générales de la saison : [lire les conditions générales 2026-2027 (PDF)](/media/conditions-generales-2026-2027.pdf).
 
 Pour étaler le paiement de votre cotisation, voir [Paiement échelonné](/rejoindre/cotisations/#etalement).
 
@@ -25,7 +25,7 @@ Chaque membre affilié au club, et donc à la fédération, est couvert par l'as
 
 Dans les 8 jours suivant l'accident :
 
-1. Remplissez la [déclaration d'accident Belfius](https://drive.google.com/file/d/1ZtXhcZvQ4eTDoZzZ-OzuvB6gjL7Oqbj1/view).
+1. Remplissez la [déclaration d'accident Belfius](/media/declaration-accident-belfius.pdf).
 2. Envoyez-la à Belfius, [pci.aangifte-constat@belins.be](mailto:pci.aangifte-constat@belins.be), avec [manager@ixelles.hockey](mailto:manager@ixelles.hockey) en copie.
 3. Belfius ouvre un dossier et vous communique son numéro.
 4. Payez les factures de soins, puis envoyez-les à Belfius avec le numéro de dossier.
