@@ -6,7 +6,7 @@ order: 20
 
 ## Entraînements {#entrainements}
 
-Saison 2026-2027. Chaque ligne indique les équipes qui s'entraînent en même temps sur le terrain.
+Saison 2026-2027. Chaque ligne indique les équipes qui s'entraînent en même temps sur le terrain. [Planning officiel en PDF](/media/planning-entrainements-2026-2027.pdf).
 
 **Légende.** U = moins de (U9 : moins de 9 ans), B = garçons, G = filles, D = dames, H = hommes. « Clinics » : séances de perfectionnement.
 
