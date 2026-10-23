@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsList from './NewsList.astro';
 import EventList from './EventList.astro';
 import PartnerList from './PartnerList.astro';
+import MainSponsor from './MainSponsor.astro';
+import { partnersHref } from '../data/site';
 import { getNews, getUpcomingEvents } from '../data/content';
 import { homeHref, ui, type Locale } from '../i18n/ui';
 
@@ -58,6 +60,9 @@ const copy = {
         <a class="button primary" href={copy.joinHref}>{t.join}</a>
         <a class="button" href={copy.tryHref}>{t.tryIt}</a>
       </p>
+      <div class="hero-sponsor">
+        <MainSponsor locale={locale} />
+      </div>
     </div>
   </section>
 
@@ -100,6 +105,9 @@ const copy = {
     <section aria-labelledby="partners">
       <h2 id="partners">{t.partners}</h2>
       <PartnerList />
+      <p>
+        <a href={partnersHref}>{t.allPartners} →</a> · <a href={`${partnersHref}#sponsoring`}>{t.becomeSponsor}</a>
+      </p>
     </section>
   </div>
 </BaseLayout>
@@ -107,8 +115,15 @@ const copy = {
 <style>
   .hero {
     padding-block: 2.5rem 2rem;
-    background: linear-gradient(160deg, var(--color-primary) 0%, #17448f 100%);
+    background: linear-gradient(160deg, var(--color-primary) 0%, #014d24 100%);
     color: var(--color-primary-contrast);
+  }
+
+  /* Sur le fond vert, le bouton principal passe en blanc. */
+  .hero .button.primary {
+    background: var(--color-bg);
+    border-color: var(--color-bg);
+    color: var(--color-primary);
   }
 
   .hero h1 {
@@ -120,6 +135,12 @@ const copy = {
     margin: 0;
     font-size: 1.15rem;
     opacity: 0.92;
+  }
+
+  .hero-sponsor:not(:empty) {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
   }
 
   .container > section {

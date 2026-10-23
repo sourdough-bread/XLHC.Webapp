@@ -1,5 +1,6 @@
 ---
-import { funders, site } from '../data/site';
+import MainSponsor from './MainSponsor.astro';
+import { funders, mainSponsors, partnersHref, site } from '../data/site';
 import { ui, type Locale } from '../i18n/ui';
 
 interface Props {
@@ -31,6 +32,14 @@ const socials = [
 ---
 
 <footer class="site-footer">
+  {
+    mainSponsors.length > 0 && (
+      <div class="container sponsors">
+        <MainSponsor locale={locale} />
+        <a href={partnersHref}>{t.allPartners} →</a>
+      </div>
+    )
+  }
   <div class="container grid">
     <div>
       <p class="name">{site.name}</p>
@@ -72,6 +81,17 @@ const socials = [
     padding-block: 2rem 1rem;
     background: var(--color-primary);
     color: var(--color-primary-contrast);
+  }
+
+  .sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.15);
   }
 
   .grid {

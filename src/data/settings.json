@@ -1,6 +1,7 @@
 {
   "name": "Ixelles Hockey Club",
   "shortName": "Ixelles HC",
+  "logo": "",
   "address": "Rue Volta 18, 1050 Ixelles",
   "mapUrl": "https://www.openstreetmap.org/search?query=Rue%20Volta%2018%2C%201050%20Ixelles",
   "email": "manager@ixelles.hockey",
@@ -13,12 +14,12 @@
   "pitchFallbackStatus": "ok",
   "pitchFallbackNote": "",
   "partners": [
-    { "name": "Hockey-Player", "url": "https://hockeyplayer.shop/" },
-    { "name": "Weinvest", "url": "https://weinvest.be/fr-BE" },
-    { "name": "BX1", "url": "https://bx1.be/" },
-    { "name": "Digitribe", "url": "https://www.digitribe.be/" },
-    { "name": "Victor Avocats", "url": "http://www.victor.law/" },
-    { "name": "G5V", "url": "" }
+    { "name": "Hockey-Player", "url": "https://hockeyplayer.shop/", "tier": "partner", "logo": "" },
+    { "name": "Weinvest", "url": "https://weinvest.be/fr-BE", "tier": "partner", "logo": "" },
+    { "name": "BX1", "url": "https://bx1.be/", "tier": "partner", "logo": "" },
+    { "name": "Digitribe", "url": "https://www.digitribe.be/", "tier": "partner", "logo": "" },
+    { "name": "Victor Avocats", "url": "http://www.victor.law/", "tier": "partner", "logo": "" },
+    { "name": "G5V", "url": "", "tier": "partner", "logo": "" }
   ],
   "funders": [
     { "name": "ADEPS" },
