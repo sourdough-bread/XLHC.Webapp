@@ -421,3 +421,6 @@ content:
             label: Nom
             type: string
             required: true
+          - name: logo
+            label: Logo (facultatif ; le nom s'affiche sans logo)
+            type: image

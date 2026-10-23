@@ -9,7 +9,7 @@ Merci à nos partenaires qui soutiennent le club.
 
 ## Devenir sponsor {#sponsoring}
 
-Toutes nos formules sont dans la [plaquette sponsoring (PDF)](https://drive.google.com/file/d/1Z8lMNph-InSJrmvU82bZ77FRZpxcjDym/view). Pour en parler, écrivez à [manager@ixelles.hockey](mailto:manager@ixelles.hockey).
+Toutes nos formules sont dans la [plaquette sponsoring (PDF)](/media/plaquette-sponsoring.pdf). Pour en parler, écrivez à [manager@ixelles.hockey](mailto:manager@ixelles.hockey).
 
 ## Business Club {#business-club}
 

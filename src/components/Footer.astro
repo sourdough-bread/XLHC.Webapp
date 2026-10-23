@@ -69,7 +69,7 @@ const socials = [
   <div class="container funders">
     <p class="name">{t.funders}</p>
     <ul>
-      {funders.map((f) => <li>{f.name}</li>)}
+      {funders.map((f) => <li>{f.logo ? <img src={f.logo} alt={f.name} loading="lazy" /> : f.name}</li>)}
     </ul>
   </div>
   <p class="container copy">© {new Date().getFullYear()} {site.name} ASBL</p>
@@ -148,6 +148,12 @@ const socials = [
     color: var(--color-primary);
     font-size: 0.85rem;
     font-weight: 600;
+  }
+
+  .funders li img {
+    display: block;
+    width: auto;
+    height: 2.5rem;
   }
 
   .copy {
