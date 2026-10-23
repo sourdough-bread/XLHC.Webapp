@@ -32,7 +32,7 @@ const code = (html) => html.match(/<strong>([^<]+)<\/strong>/)?.[1];
 
 async function load(endpoint) {
   const res = await fetch(`${API}/${endpoint}?clubid=${CLUB_ID}&wpml_language=fr`, {
-    headers: { 'User-Agent': 'IxellesHC-site/1.0 (+https://ixelles.hockey)', Accept: 'application/json' },
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; IxellesHC-site/1.0; +https://ixelles.hockey)', Accept: 'application/json' },
     signal: AbortSignal.timeout(30_000),
   });
   if (!res.ok) throw new Error(`${endpoint}: HTTP ${res.status}`);
