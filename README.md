@@ -28,7 +28,7 @@ On peut aussi modifier les fichiers sur GitHub avec le bouton crayon.
 | Événements (dates, inscription Twizzit) | `src/content/events/` |
 | Stages (dates, âges, prix, réservation Twizzit) | `src/content/camps/` |
 | Équipes (cartes des pages Juniors et Seniors, adresse des capitaines sur l'accueil) | `src/content/teams/` |
-| Matchs et résultats (bandeau vert sous la photo d'accueil) | `src/content/matches/` |
+| Matchs et résultats (bandeau vert sous la photo d'accueil) | `src/content/matches/` : les fichiers `hb-*` sont importés automatiquement de hockey.be (`.github/workflows/scores.yml`, équipes suivies dans `scripts/fetch-matches.mjs`) ; les autres sont saisis à la main |
 | Coordonnées, liens Twizzit, état du terrain, partenaires, pouvoirs publics | `src/data/settings.json` |
 | Images (photos de l'accueil dans `public/media/photos/`) | `public/media/` |
 | Textes de l'interface (menu, boutons) en FR et EN | `src/i18n/ui.ts` |
