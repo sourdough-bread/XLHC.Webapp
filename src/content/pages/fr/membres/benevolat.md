@@ -12,7 +12,7 @@ Vous avez des idées pour animer l'école des jeunes (Saint-Nicolas, Pâques, ba
 
 ## Arbitrer des matchs juniors
 
-Chaque semaine, il faut plus d'arbitres. Si l'envie est là mais que vous hésitez à faire le premier pas, le club vous forme et vous fait encadrer par l'un de nos arbitres nationaux, en commençant par les catégories sur demi-terrain. Écrivez à [manager@ixelles.hockey](mailto:manager@ixelles.hockey), et voir [Arbitrage](/membres/sport/#arbitrage) pour l'examen.
+Chaque semaine, il faut plus d'arbitres. Si l'envie est là mais que vous hésitez à faire le premier pas, le club vous forme et vous fait encadrer par l'un de nos arbitres nationaux, en commençant par les catégories sur demi-terrain. Écrivez à [arbitrage@ixelles.hockey](mailto:arbitrage@ixelles.hockey), et voir [Arbitrage](/membres/sport/#arbitrage) pour l'examen.
 
 ## Convention de bénévolat
 

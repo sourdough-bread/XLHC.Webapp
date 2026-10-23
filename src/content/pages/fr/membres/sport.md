@@ -88,7 +88,7 @@ L'examen se passe en ligne, depuis chez vous : un questionnaire à choix multipl
 
 1. Lisez les règles de la fédération : [outdoor](https://hockey.be/fr/competitions/outdoor-hockey/regles-du-jeu/) et [indoor](https://hockey.be/fr/competitions/indoor-hockey/regles-du-jeu/).
 2. Lisez notre [résumé des règles indoor les plus importantes](/media/resume-regles-indoor.pdf).
-3. Créez votre compte Drillster avec [ce lien réservé aux membres du club](https://www.drillster.com/user/groups/join/VIMQFjtC5gE1FKGNUPXrWq) : tout en bas de la page, choisissez « Pas encore de compte Drillster ? Créer un compte ». Si besoin, demandez une invitation à [manager@ixelles.hockey](mailto:manager@ixelles.hockey).
+3. Créez votre compte Drillster avec [ce lien réservé aux membres du club](https://www.drillster.com/user/groups/join/VIMQFjtC5gE1FKGNUPXrWq) : tout en bas de la page, choisissez « Pas encore de compte Drillster ? Créer un compte ». Si besoin, demandez une invitation à [arbitrage@ixelles.hockey](mailto:arbitrage@ixelles.hockey).
 4. Entraînez-vous : dans « Abonnement », ouvrez « IXELLES - Formation théorique d'arbitrage » et faites les cinq exercices (les participants au jeu, la gestuelle, les situations de jeu, les sanctions, les règles du jeu) autant de fois que vous voulez. Vous pouvez vous arrêter et reprendre quand vous voulez.
 5. Passez l'examen : dans « Tests », choisissez l'examen outdoor ou indoor. Pas besoin de passer les deux le même jour.
 6. Prévenez-nous quand vous avez réussi.

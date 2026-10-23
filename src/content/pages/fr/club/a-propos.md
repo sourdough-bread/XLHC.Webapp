@@ -22,11 +22,12 @@ Concrètement, le club veut :
 ### Responsables opérationnels
 
 - **Manager** : Jehenne Klaï, [manager@ixelles.hockey](mailto:manager@ixelles.hockey)
-- **Directeur de l'école des jeunes** : Vincent Launois
+- **Directeur de l'école des jeunes** : Vincent Launois, [vincent@ixelles.hockey](mailto:vincent@ixelles.hockey)
 
 ### Organe d'administration
 
 - **Président** : Philippe Vernet, [president@ixelles.hockey](mailto:president@ixelles.hockey)
+- **Contact de l'Organe d'administration** : [oa@ixelles.hockey](mailto:oa@ixelles.hockey)
 - **Administrateurs jeunes** : Emilie Bordes
 - **Administrateurs adultes** : Marie Carlier, Elisabeth Hens, Nathan Spilborghs
 - **Trésorier** : Emilio Gamba, [finances@ixelles.hockey](mailto:finances@ixelles.hockey)
@@ -50,7 +51,7 @@ La charte éthique et inclusive du club. L'esprit sportif, le respect et le fair
 - Tout le monde est concerné : joueur·ses, staff, supporteurs·trices.
 - Solidarité, bienveillance, inclusion.
 
-N'hésitez pas à contacter l'Organe d'administration, [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey), si un événement vous paraît ne pas correspondre à la charte éthique et inclusive du XLHC.
+N'hésitez pas à écrire à [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey), ou pour une question de fair-play à [fairplay@ixelles.hockey](mailto:fairplay@ixelles.hockey), si un événement vous paraît ne pas correspondre à la charte éthique et inclusive du XLHC.
 
 ## Règlement d'ordre intérieur {#roi}
 

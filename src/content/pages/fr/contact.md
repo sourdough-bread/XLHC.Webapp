@@ -24,8 +24,17 @@ Rue de Brebis, le stationnement est en zone bleue, avec disque. Attention au dé
 
 ## Nous écrire
 
-Club : [manager@ixelles.hockey](mailto:manager@ixelles.hockey)
+| Pour | Contact | Adresse |
+| --- | --- | --- |
+| Secrétariat et administration | Jehenne Klaï, manager | [manager@ixelles.hockey](mailto:manager@ixelles.hockey) |
+| Présidence et infrastructure | Philippe Vernet, président | [president@ixelles.hockey](mailto:president@ixelles.hockey) |
+| Sportif et dames | Organe d'administration : Nathan Spilborghs (sportif) et Marie Carlier (dames) | [oa@ixelles.hockey](mailto:oa@ixelles.hockey) |
+| École des jeunes et direction technique jeunes | Vincent Launois | [vincent@ixelles.hockey](mailto:vincent@ixelles.hockey) |
+| Trésorerie | Emilio Gamba, trésorier | [finances@ixelles.hockey](mailto:finances@ixelles.hockey) |
+| Éthique | Référent éthique | [ethique@ixelles.hockey](mailto:ethique@ixelles.hockey) |
+| Communication | Pacôme | [communication@ixelles.hockey](mailto:communication@ixelles.hockey) |
+| Fair-play | Emilie Bordes | [fairplay@ixelles.hockey](mailto:fairplay@ixelles.hockey) |
+| Arbitrage | Responsable arbitrage | [arbitrage@ixelles.hockey](mailto:arbitrage@ixelles.hockey) |
+| Sponsoring | Elisabeth Hens et Nathan Spilborghs | [sponsoring@ixelles.hockey](mailto:sponsoring@ixelles.hockey) |
 
 Compte bancaire : BE33 1430 8707 1446 (Fintro)
-
-> À compléter : adresses de rôle (juniors@, seniors@, partenaires@).
