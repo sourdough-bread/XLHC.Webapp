@@ -106,15 +106,18 @@ Chaque enregistrement sur `main` lance le workflow `.github/workflows/deploy.yml
 
 | Cible | Adresse | Quand |
 | --- | --- | --- |
-| Aperçu GitHub Pages | https://sourdough-bread.github.io/XLHC.Webapp/ | toujours |
-| Aperçu OVH | nouveau.ixelles.hockey | si la variable `OVH_PREVIEW_DIR` existe |
+| Aperçu GitHub Pages | https://nouveau.ixelles.hockey (fichier `public/CNAME`) | toujours |
+| Aperçu OVH (facultatif) | par FTP | si la variable `OVH_PREVIEW_DIR` existe |
 | Site public OVH | www.ixelles.hockey | si la variable `OVH_PRODUCTION_DIR` existe |
 
 Les deux aperçus sont cachés de Google. `npm run build` génère aussi le `.htaccess` d'OVH (redirections 301 des anciennes adresses, HTTPS, www) à partir de `src/data/redirects.mjs`.
 
-Mise en place, une seule fois :
+Mise en place de nouveau.ixelles.hockey, une seule fois :
 
-1. GitHub, **Settings → Pages → Source : GitHub Actions**.
+1. GitHub, **Settings → Pages → Source : GitHub Actions**, puis **Custom domain : `nouveau.ixelles.hockey`** et **Enforce HTTPS**.
+2. Chez OVH, **Web Cloud → Noms de domaine → ixelles.hockey → Zone DNS** : ajouter un enregistrement **CNAME**, sous-domaine `nouveau`, cible `sourdough-bread.github.io.` (point final compris). Ne touchez pas aux MX, SPF ni DMARC.
+
+Mise en place d'OVH par FTP (facultatif), une seule fois :
 2. Dans l'espace client OVH, **Web Cloud → Hébergements → FTP-SSH** : notez le serveur FTP et l'identifiant (changez le mot de passe si besoin).
 3. GitHub, **Settings → Secrets and variables → Actions** :
    - secrets `OVH_FTP_SERVER`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD` ;

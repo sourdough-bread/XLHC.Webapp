@@ -2,7 +2,7 @@
 // - production (par défaut) : le site public sur OVH ;
 // - preview : l'aperçu nouveau.ixelles.hockey sur OVH, caché de Google ;
 // - github-pages : l'aperçu gratuit sur GitHub Pages, caché de Google et servi
-//   sous un sous-dossier (BASE_PATH, par exemple /XLHC.Webapp).
+//   sous un sous-dossier si BASE_PATH est défini (inutile avec le domaine nouveau.ixelles.hockey).
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { redirects } from '../src/data/redirects.mjs';
