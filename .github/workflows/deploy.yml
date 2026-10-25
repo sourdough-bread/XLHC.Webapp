@@ -1,8 +1,8 @@
 name: Deploy
 
 # À chaque enregistrement sur main (Pages CMS ou GitHub) :
-# - l'aperçu GitHub Pages est toujours mis à jour ;
-# - l'aperçu OVH (nouveau.ixelles.hockey) est mis à jour si la variable OVH_PREVIEW_DIR existe ;
+# - l'aperçu GitHub Pages (nouveau.ixelles.hockey, domaine défini par public/CNAME) est toujours mis à jour ;
+# - un aperçu OVH par FTP est possible si la variable OVH_PREVIEW_DIR existe (inutile tant que GitHub Pages sert nouveau.ixelles.hockey) ;
 # - le site public sur OVH est mis à jour si la variable OVH_PRODUCTION_DIR existe (à créer le jour de la bascule).
 # Les envois vers OVH utilisent les secrets OVH_FTP_SERVER, OVH_FTP_USER et OVH_FTP_PASSWORD.
 
@@ -35,7 +35,6 @@ jobs:
       - run: npm run build
         env:
           SITE_TARGET: github-pages
-          BASE_PATH: /${{ github.event.repository.name }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
