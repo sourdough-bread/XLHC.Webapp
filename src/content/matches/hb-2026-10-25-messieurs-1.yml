@@ -3,4 +3,5 @@ team: "Messieurs 1"
 opponent: "Tournai"
 date: 2026-10-25
 home: true
-time: "15:00"
+scoreFor: 6
+scoreAgainst: 1

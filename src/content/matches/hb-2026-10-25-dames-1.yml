@@ -3,4 +3,5 @@ team: "Dames 1"
 opponent: "Rix"
 date: 2026-10-25
 home: false
-time: "11:00"
+scoreFor: 1
+scoreAgainst: 2
