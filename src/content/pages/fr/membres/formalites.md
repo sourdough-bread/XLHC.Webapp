@@ -1,6 +1,6 @@
 ---
 title: "Formalités"
-description: "Conditions générales, attestations de mutuelle, déclaration d'accident, application Hockey Belgium et désaffiliation."
+description: "Conditions générales, attestations de mutuelle, déclaration d'accident (voir aussi Assurances), application Hockey Belgium et désaffiliation."
 order: 30
 ---
 
@@ -25,7 +25,7 @@ Chaque membre affilié au club, et donc à la fédération, est couvert par l'as
 
 Dans les 8 jours suivant l'accident :
 
-1. Remplissez la [déclaration d'accident Belfius](/media/declaration-accident-belfius.pdf).
+1. Remplissez la [déclaration d'accident corporel](/media/assurances/declaration-accident-corporel-fr-2026-10.pdf) (ou, si vous avez causé un dommage à un tiers, la déclaration de responsabilité civile : tous les formulaires, en français et en néerlandais, sont sur la page [Assurances](/membres/assurances/)).
 2. Envoyez-la à Belfius, [pci.aangifte-constat@belins.be](mailto:pci.aangifte-constat@belins.be), avec [manager@ixelles.hockey](mailto:manager@ixelles.hockey) en copie.
 3. Belfius ouvre un dossier et vous communique son numéro.
 4. Payez les factures de soins, puis envoyez-les à Belfius avec le numéro de dossier.
